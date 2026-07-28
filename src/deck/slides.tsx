@@ -4,18 +4,12 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BookOpenText,
-  Boxes,
   CloudUpload,
   Code2,
   FileText,
-  Keyboard,
-  Layers3,
   Link2,
   MonitorPlay,
   PackageCheck,
-  Sparkles,
-  Users,
-  Workflow,
 } from "lucide-react";
 import type { DeckSlide } from "./types";
 
@@ -70,102 +64,75 @@ function Lead({ children }: { children: React.ReactNode }) {
   return <p className="slide-lead">{children}</p>;
 }
 
-function FeatureCard({ icon: Icon, title, children }: { icon: LucideIcon; title: string; children: React.ReactNode }) {
-  return (
-    <article className="feature-card">
-      <div className="icon-frame" aria-hidden="true">
-        <Icon />
-      </div>
-      <div>
-        <h2>{title}</h2>
-        <p>{children}</p>
-      </div>
-    </article>
-  );
-}
-
 function CoverSlide() {
   return (
     <div className="investor-cover">
+      <img
+        className="investor-cover__logo"
+        src={`${import.meta.env.BASE_URL}brand/cakewalk-logo-orange.svg`}
+        alt="Cakewalk"
+      />
       <div className="investor-cover__copy">
-        <span className="investor-cover__rule" aria-hidden="true" />
-        <h1 className="investor-cover__title">
-          <span>Series Seed</span>
-          <span>Investor Deck</span>
-        </h1>
+        <h1 className="investor-cover__title">Series Seed Investor Deck</h1>
         <CurrentDeckMonth />
       </div>
-
-      <div className="investor-cover__motif" aria-hidden="true">
-        <span className="investor-cover__orbit investor-cover__orbit--outer" />
-        <span className="investor-cover__orbit investor-cover__orbit--inner" />
-        <span className="investor-cover__seed" />
-      </div>
     </div>
   );
 }
 
-function StatementSlide() {
+function MissionSlide() {
   return (
-    <div className="statement-layout">
-      <Eyebrow>THE STORY</Eyebrow>
-      <h1 className="statement-title">
-        A great deck is a guided conversation, <em>not a scrollable document.</em>
+    <div className="ceremony-layout">
+      <h1 className="ceremony-title">
+        <span className="ceremony-line">Our mission is to make</span>{" "}
+        <span className="ceremony-line">high quality employee benefits</span>{" "}
+        <span className="ceremony-line ceremony-title__emphasis">accessible and easy to offer</span>{" "}
+        <span className="ceremony-line">for every small business.</span>
       </h1>
-      <div className="statement-rule" aria-hidden="true" />
-      <p>One idea per beat. One clear next step. Enough system underneath that the speaker can stay present.</p>
     </div>
   );
 }
 
-function SystemSlide() {
+function SolutionSlide() {
   return (
-    <div className="content-stack">
-      <div className="title-block">
-        <Eyebrow>THE SYSTEM</Eyebrow>
-        <SlideHeading>A presentation system, not a pile of pages.</SlideHeading>
-        <Lead>Keep the reference deck's strongest ideas, while removing its nested build, stale source files, and manual deployment steps.</Lead>
-      </div>
-      <div className="feature-grid">
-        <FeatureCard icon={Layers3} title="One story registry">
-          Slides, titles, sections, notes, and order live together in a single typed file.
-        </FeatureCard>
-        <FeatureCard icon={Keyboard} title="Presentation-first controls">
-          Arrow keys, Space, touch gestures, fullscreen, overview, and browser history all agree.
-        </FeatureCard>
-        <FeatureCard icon={CloudUpload} title="Publish on every push">
-          GitHub Actions builds the static site with the correct repository path and deploys the artifact.
-        </FeatureCard>
-      </div>
+    <div className="ceremony-layout">
+      <h1 className="ceremony-title ceremony-title--solution">
+        <span className="ceremony-line">Cakewalk enables all small business owners</span>{" "}
+        <span className="ceremony-line">
+          to offer <span className="ceremony-title__emphasis">enterprise grade employee benefits</span>
+        </span>{" "}
+        <span className="ceremony-line">without friction.</span>
+      </h1>
     </div>
   );
 }
 
-const flowSteps: Array<{ icon: LucideIcon; label: string; title: string; body: string; tone: string }> = [
-  { icon: Boxes, label: "01", title: "Choose a bundle", body: "Put health, dental, and vision choices into one understandable frame.", tone: "coral" },
-  { icon: Users, label: "02", title: "Invite your team", body: "Make the next action obvious and give every employee a clear path in.", tone: "blue" },
-  { icon: Sparkles, label: "03", title: "Open enrollment", body: "Turn the peak moment into a confident, low-friction launch.", tone: "sunny" },
-  { icon: Workflow, label: "04", title: "Keep it moving", body: "Manage the ongoing work without losing the simplicity of the first day.", tone: "mint" },
+const burdenPoints = [
+  { number: "01", stage: "Compare", detail: "Confusing products and terminology" },
+  { number: "02", stage: "Coordinate", detail: "Disconnected carriers, forms, and systems" },
+  { number: "03", stage: "Understand", detail: "Unclear coverage and costs" },
+  { number: "04", stage: "Keep current", detail: "Ongoing employee and billing changes" },
 ];
 
-function FlowSlide() {
+function BurdenSlide() {
   return (
-    <div className="content-stack">
-      <div className="title-block title-block--compact">
-        <Eyebrow>PRODUCT NARRATIVE</Eyebrow>
-        <SlideHeading>From choice to enrollment, one clear path.</SlideHeading>
-        <Lead>The deck components are flexible enough for the Cakewalk story and disciplined enough to keep every slide legible.</Lead>
-      </div>
-      <ol className="flow-grid">
-        {flowSteps.map(({ icon: Icon, label, title, body, tone }) => (
-          <li className={`flow-card flow-card--${tone}`} key={label}>
-            <div className="flow-card__top">
-              <span>{label}</span>
-              <Icon aria-hidden="true" />
+    <div className="burden-layout">
+      <h1 className="burden-title">
+        <span>Too many calls. Too many forms.</span>
+        <span className="burden-title__emphasis">Too much uncertainty.</span>
+      </h1>
+
+      <ol className="burden-grid" aria-label="The work that turns benefits into a second job">
+        {burdenPoints.map((point) => (
+          <li className="burden-item" key={point.number}>
+            <div className="burden-stage">
+              <span>{point.number}</span>
+              <strong>{point.stage}</strong>
             </div>
-            <h2>{title}</h2>
-            <p>{body}</p>
-            <ArrowRight className="flow-card__arrow" aria-hidden="true" />
+            <div className="burden-connector" aria-hidden="true" />
+            <div className="burden-card">
+              <p>{point.detail}</p>
+            </div>
           </li>
         ))}
       </ol>
@@ -275,25 +242,30 @@ export const slides: DeckSlide[] = [
   },
   {
     id: "story",
-    title: "A guided conversation",
-    section: "The story",
-    tone: "blush",
-    notes: "Use this as a section-level statement beat. Pause before advancing.",
-    render: () => <StatementSlide />,
+    title: "Our mission",
+    section: "Mission",
+    tone: "ink",
+    brandPlacement: "footer",
+    notes: "Pause on the mission. Emphasize accessible and easy to offer.",
+    render: () => <MissionSlide />,
   },
   {
     id: "system",
-    title: "A presentation system",
-    section: "The system",
-    tone: "sidewalk",
-    render: () => <SystemSlide />,
+    title: "The solution",
+    section: "The solution",
+    tone: "ink",
+    brandPlacement: "footer",
+    notes: "Introduce Cakewalk as the low-friction path to enterprise-grade benefits.",
+    render: () => <SolutionSlide />,
   },
   {
     id: "flow",
-    title: "One clear path",
-    section: "Product narrative",
-    tone: "canvas",
-    render: () => <FlowSlide />,
+    title: "Offering benefits shouldn’t become a second job",
+    section: "The problem",
+    tone: "sidewalk",
+    brandPlacement: "footer",
+    notes: "The problem isn’t that small-business owners don’t care about benefits. The problem is that the process was never designed around them. You’re expected to compare unfamiliar products, coordinate paperwork, enroll employees, handle billing, and manage changes—all while running the business. Cakewalk takes that work off your plate.",
+    render: () => <BurdenSlide />,
   },
   {
     id: "proof",

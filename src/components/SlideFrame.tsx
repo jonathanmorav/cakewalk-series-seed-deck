@@ -14,6 +14,7 @@ function assetUrl(path: string) {
 
 export function SlideFrame({ slide, index, total, children }: SlideFrameProps) {
   const tone = slide.tone ?? "canvas";
+  const brandPlacement = slide.brandPlacement ?? "header";
   const wordmark = tone === "ink" ? "brand/cakewalk-logo-white.svg" : "brand/cakewalk-logo-orange.svg";
 
   return (
@@ -27,7 +28,7 @@ export function SlideFrame({ slide, index, total, children }: SlideFrameProps) {
 
       <header className="slide__chrome slide__chrome--top">
         <span className="slide__section">{slide.section}</span>
-        <img className="slide__wordmark" src={assetUrl(wordmark)} alt="Cakewalk" />
+        {brandPlacement === "header" && <img className="slide__wordmark" src={assetUrl(wordmark)} alt="Cakewalk" />}
       </header>
 
       <div className="slide__body">{children}</div>
@@ -36,7 +37,11 @@ export function SlideFrame({ slide, index, total, children }: SlideFrameProps) {
         <span className="slide__counter">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </span>
-        <img className="slide__mark" src={assetUrl("brand/cakewalk-mark.svg")} alt="" aria-hidden="true" />
+        {brandPlacement === "footer" ? (
+          <img className="slide__wordmark" src={assetUrl(wordmark)} alt="Cakewalk" />
+        ) : (
+          <img className="slide__mark" src={assetUrl("brand/cakewalk-mark.svg")} alt="" aria-hidden="true" />
+        )}
       </footer>
     </section>
   );

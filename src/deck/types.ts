@@ -7,6 +7,7 @@ export interface DeckSlide {
   title: string;
   section: string;
   tone?: SlideTone;
+  brandPlacement?: "header" | "footer";
   notes?: string;
   render: () => ReactNode;
 }
