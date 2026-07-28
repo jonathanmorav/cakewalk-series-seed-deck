@@ -1,0 +1,173 @@
+/**
+ * Cakewalk typography — mobile-first responsive scale.
+ *
+ * TWO scales — never mix:
+ *   Product   ≤32px desktop  — dashboards, forms, modals, app shells
+ *   Marketing 42–64px desktop — landing heroes, ceremony beats
+ *
+ * Product variants drive `<Typography variant="…">`. Marketing variants
+ * are utility classes only (`.cw-v2-marketing-typography--hero`, etc.).
+ *
+ * Source of truth lifted from `packages/ui/src/styles/typography-scale.css`
+ * and `marketing-typography-scale.css`.
+ */
+
+:root {
+  /* Families */
+  --cw-v2-font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cw-v2-font-display: var(--cw-v2-font-sans);
+  --cw-v2-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+
+  /* Weights */
+  --cw-v2-font-weight-regular: 400; /* @kind other */
+  --cw-v2-font-weight-medium: 500; /* @kind other */
+  --cw-v2-font-weight-semibold: 600; /* @kind other */
+  --cw-v2-font-weight-bold: 700; /* @kind other */
+  --cw-v2-font-weight-extrabold: 800; /* @kind other */
+
+  /* Letter spacing — eyebrow / overline */
+  --cw-v2-letter-spacing-label: 1.68px;
+
+  /* Mobile (< 640px) — readability-first */
+  --cw-v2-font-size-display: 2.25rem;        /* 36px */
+  --cw-v2-font-size-heading-xl: 1.75rem;     /* 28px */
+  --cw-v2-font-size-heading-large: 1.375rem; /* 22px */
+  --cw-v2-font-size-heading-medium: 1.25rem; /* 20px */
+  --cw-v2-font-size-heading-small: 1.125rem; /* 18px */
+  --cw-v2-font-size-body-large: 1.1875rem;   /* 19px */
+  --cw-v2-font-size-body: 1rem;              /* 16px */
+  --cw-v2-font-size-body-small: 0.875rem;    /* 14px */
+  --cw-v2-font-size-body-mono-small: 0.8125rem; /* 13px */
+  --cw-v2-font-size-caption: 0.75rem;        /* 12px */
+  --cw-v2-font-size-overline: 0.75rem;       /* 12px */
+
+  --cw-v2-line-height-display: 1.2;
+  --cw-v2-line-height-heading-xl: 1.25;
+  --cw-v2-line-height-heading-large: 1.35;
+  --cw-v2-line-height-heading-medium: 1.4;
+  --cw-v2-line-height-heading-small: 1.45;
+  --cw-v2-line-height-body-large: 1.5;
+  --cw-v2-line-height-body: 1.55;
+  --cw-v2-line-height-body-small: 1.5;
+  --cw-v2-line-height-caption: 1.45;
+  --cw-v2-line-height-tight: 1.35;
+  --cw-v2-line-height-normal: 1.5;
+  --cw-v2-line-height-relaxed: 1.6;
+
+  /* Marketing — mobile */
+  --cw-v2-marketing-font-size-hero: 2.625rem;    /* 42px */
+  --cw-v2-marketing-font-size-display: 2.25rem;  /* 36px */
+  --cw-v2-marketing-font-size-step: 2.25rem;     /* 36px */
+  --cw-v2-marketing-font-size-stat: 3rem;        /* 48px */
+  --cw-v2-marketing-font-size-micro: 0.625rem;   /* 10px */
+  --cw-v2-marketing-font-size-ceremony: clamp(2rem, 6vw, 3.75rem);          /* 32→60 */
+  --cw-v2-marketing-font-size-ceremony-hero: clamp(2.5rem, 8vw, 5rem);       /* 40→80 */
+  --cw-v2-marketing-font-size-ceremony-analysis: clamp(2rem, 4.5vw, 2.85rem); /* 32→45.6 */
+  --cw-v2-marketing-line-height-hero: 1.08;
+  --cw-v2-marketing-line-height-display: 1.1;
+  --cw-v2-marketing-line-height-step: 1;
+  --cw-v2-marketing-line-height-stat: 1;
+  --cw-v2-marketing-line-height-micro: 1.4;
+  --cw-v2-marketing-line-height-ceremony: 1.08;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    /* Tablet (640px – 1023px) — product */
+    --cw-v2-font-size-display: 2.125rem;       /* 34px */
+    --cw-v2-font-size-heading-xl: 1.625rem;    /* 26px */
+    --cw-v2-font-size-heading-large: 1.3125rem;/* 21px */
+    --cw-v2-font-size-heading-medium: 1.1875rem; /* 19px */
+    --cw-v2-font-size-heading-small: 1.0625rem;/* 17px */
+    --cw-v2-font-size-body-large: 1.125rem;    /* 18px */
+    --cw-v2-font-size-body: 0.9375rem;         /* 15px */
+    --cw-v2-font-size-body-small: 0.8125rem;   /* 13px */
+    --cw-v2-font-size-body-mono-small: 0.75rem;/* 12px */
+    --cw-v2-font-size-caption: 0.6875rem;      /* 11px */
+    --cw-v2-font-size-overline: 0.6875rem;     /* 11px */
+
+    /* Marketing — tablet */
+    --cw-v2-marketing-font-size-hero: 3.25rem;    /* 52px */
+    --cw-v2-marketing-font-size-display: 2.625rem;/* 42px */
+    --cw-v2-marketing-font-size-step: 3rem;       /* 48px */
+    --cw-v2-marketing-font-size-stat: 3.5rem;     /* 56px */
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    /* Desktop (1024px+) — compact, dense interface */
+    --cw-v2-font-size-display: 2rem;           /* 32px */
+    --cw-v2-font-size-heading-xl: 1.5rem;      /* 24px */
+    --cw-v2-font-size-heading-large: 1.25rem;  /* 20px */
+    --cw-v2-font-size-heading-medium: 1.125rem;/* 18px */
+    --cw-v2-font-size-heading-small: 1rem;     /* 16px */
+    --cw-v2-font-size-body-large: 1.125rem;    /* 18px */
+    --cw-v2-font-size-body: 0.875rem;          /* 14px */
+    --cw-v2-font-size-body-small: 0.8125rem;   /* 13px */
+    --cw-v2-font-size-body-mono-small: 0.75rem;/* 12px */
+    --cw-v2-font-size-caption: 0.6875rem;      /* 11px */
+    --cw-v2-font-size-overline: 0.6875rem;     /* 11px */
+
+    /* Marketing — desktop */
+    --cw-v2-marketing-font-size-hero: 3.75rem;   /* 60px */
+    --cw-v2-marketing-font-size-display: 3rem;   /* 48px */
+    --cw-v2-marketing-font-size-step: 3rem;      /* 48px */
+    --cw-v2-marketing-font-size-stat: 4rem;      /* 64px */
+  }
+}
+
+/* ── Marketing utility classes ────────────────────────────── *
+ * Use only on landing heroes, payoff sections, and ceremony beats.
+ * Never inside dashboards, forms, modals, or settings.
+ */
+
+.cw-v2-marketing-typography {
+  font-family: var(--cw-v2-font-sans);
+  margin: 0;
+  color: var(--cw-v2-color-ink);
+}
+.cw-v2-marketing-typography--hero {
+  font-size: var(--cw-v2-marketing-font-size-hero);
+  font-weight: var(--cw-v2-font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: var(--cw-v2-marketing-line-height-hero);
+}
+.cw-v2-marketing-typography--display {
+  font-size: var(--cw-v2-marketing-font-size-display);
+  font-weight: var(--cw-v2-font-weight-bold);
+  letter-spacing: -0.01em;
+  line-height: var(--cw-v2-marketing-line-height-display);
+}
+.cw-v2-marketing-typography--step {
+  font-size: var(--cw-v2-marketing-font-size-step);
+  font-weight: var(--cw-v2-font-weight-bold);
+  line-height: var(--cw-v2-marketing-line-height-step);
+}
+.cw-v2-marketing-typography--stat {
+  font-size: var(--cw-v2-marketing-font-size-stat);
+  font-weight: var(--cw-v2-font-weight-semibold);
+  line-height: var(--cw-v2-marketing-line-height-stat);
+  letter-spacing: -0.02em;
+}
+.cw-v2-marketing-typography--micro {
+  font-size: var(--cw-v2-marketing-font-size-micro);
+  font-weight: var(--cw-v2-font-weight-medium);
+  line-height: var(--cw-v2-marketing-line-height-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cw-v2-marketing-typography--ceremony {
+  font-size: var(--cw-v2-marketing-font-size-ceremony);
+  font-weight: var(--cw-v2-font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: var(--cw-v2-marketing-line-height-ceremony);
+}
+.cw-v2-marketing-typography--ceremony-hero {
+  font-size: var(--cw-v2-marketing-font-size-ceremony-hero);
+  font-weight: var(--cw-v2-font-weight-bold);
+  letter-spacing: -0.02em;
+  line-height: var(--cw-v2-marketing-line-height-ceremony);
+}

@@ -1,0 +1,42 @@
+/**
+ * Cakewalk layout tokens — content widths, grid, z-index.
+ *
+ * Breakpoints (mobile-first):
+ *   <640px      mobile  — default
+ *   ≥640px      tablet  — `sm:`
+ *   ≥1024px     desktop — `lg:`
+ *   ≥1440px     wide    — reference only
+ */
+
+:root {
+  /* Content widths */
+  --cw-v2-content-auth: 30rem;       /* 480px — auth, MFA */
+  --cw-v2-content-narrower: 38.75rem;/* 620px — narrow panels */
+  --cw-v2-content-compact: 36rem;    /* 576px */
+  --cw-v2-content-narrow: 51rem;     /* 816px — standard funnel content */
+  --cw-v2-content-wide: 75rem;       /* 1200px — dashboards */
+  --cw-v2-grid-max-width: 80rem;     /* 1280px — full page shell */
+
+  /* Grid */
+  --cw-v2-grid-columns-mobile: 4; /* @kind other */
+  --cw-v2-grid-columns-tablet: 8; /* @kind other */
+  --cw-v2-grid-columns-desktop: 12; /* @kind other */
+  --cw-v2-grid-columns-wide: 12; /* @kind other */
+  --cw-v2-grid-gutter-mobile: 1rem;
+  --cw-v2-grid-gutter-tablet: 1.25rem;
+  --cw-v2-grid-gutter-desktop: 1.5rem;
+  --cw-v2-grid-gutter-wide: 1.5rem;
+  --cw-v2-grid-margin-mobile: 1.5rem;
+  --cw-v2-grid-margin-tablet: 2.5rem;
+  --cw-v2-grid-margin-desktop: 3.75rem;
+  --cw-v2-grid-margin-wide: 5rem;
+
+  /* Z-index — dropdowns above modals so a Select inside a Dialog is clickable */
+  --cw-v2-z-base: 0; /* @kind other */
+  --cw-v2-z-raised: 1; /* @kind other */
+  --cw-v2-z-sticky: 100; /* @kind other */
+  --cw-v2-z-modal: 1100; /* @kind other */
+  --cw-v2-z-dropdown: 1200; /* @kind other */
+  --cw-v2-z-toast: 1300; /* @kind other */
+  --cw-v2-z-tooltip: 1400; /* @kind other */
+}

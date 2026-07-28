@@ -1,0 +1,26 @@
+/**
+ * Cakewalk elevation tokens.
+ *
+ * `--cw-v2-shadow-card` is the default — a tight inky drop used on every
+ * white section card. The hover variant lifts to a softer, longer shadow.
+ * Focus rings are uniform-blue at 35%.
+ */
+
+:root {
+  /* Base card system — note the tight 4-2-0.25 shadow is the v2 signature */
+  --cw-v2-shadow-card: 0 4px 2px rgb(0 0 0 / 0.25);
+  --cw-v2-shadow-card-hover: 0 12px 24px rgb(0 0 0 / 0.12);
+  --cw-v2-shadow-primary-hover: 0 8px 24px rgb(232 115 90 / 0.2);
+
+  /* General elevation ramp */
+  --cw-v2-shadow-sm: 0 1px 2px rgb(26 26 46 / 0.08);
+  --cw-v2-shadow-md: 0 12px 24px rgb(26 26 46 / 0.12);
+  --cw-v2-shadow-lg: 0 18px 40px rgb(26 26 46 / 0.16);
+
+  /* Focus + interactive ring */
+  --cw-v2-shadow-focus: 0 0 0 3px rgb(53 144 243 / 0.35);
+  --cw-v2-interactive-ring-preview: 0 0 0 3px
+    color-mix(in srgb, var(--cw-v2-color-accent) 12%, transparent);
+  --cw-v2-interactive-ring-selected: 0 0 0 3px
+    color-mix(in srgb, var(--cw-v2-color-primary) 14%, transparent);
+}

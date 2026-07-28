@@ -1,0 +1,23 @@
+/**
+ * Cakewalk corner-radius scale.
+ *
+ * sm  (5px)  small chips
+ * md  (8px)  buttons, inputs, sheet rows
+ * lg  (12px) medium cards
+ * xl  (14px) —
+ * 2xl (18px) large cards
+ * 3xl (22px) —
+ * 4xl (26px) hero cards
+ * full       avatars, pills
+ */
+
+:root {
+  --cw-v2-radius-sm: 0.3125rem;
+  --cw-v2-radius-md: 0.5rem;
+  --cw-v2-radius-lg: 0.75rem;
+  --cw-v2-radius-xl: 0.875rem;
+  --cw-v2-radius-2xl: 1.125rem;
+  --cw-v2-radius-3xl: 1.375rem;
+  --cw-v2-radius-4xl: 1.625rem;
+  --cw-v2-radius-full: 9999px;
+}

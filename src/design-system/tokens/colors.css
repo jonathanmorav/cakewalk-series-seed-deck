@@ -1,0 +1,139 @@
+/**
+ * Cakewalk colors — light mode.
+ * Source of truth lifted from `@cakewalk/ui` v2 tokens (`cw-v2-color-*`).
+ * Names are kept identical so this system stays bidirectionally compatible
+ * with the production codebase.
+ *
+ * Three layers:
+ *   1. Brand palette + core ink/sidewalk neutrals (raw values)
+ *   2. 10-step ramps for blue / coral / mint / sunny / green / purple
+ *   3. Semantic aliases (`primary`, `surface`, `text`, `accent`, …)
+ */
+
+:root {
+  /* ── Surfaces & ink ─────────────────────────────────────── */
+  --cw-v2-color-ink: #1a1a2e;
+  --cw-v2-color-ink-elevated: #22223a;
+  --cw-v2-color-letter-white: #ffffff;
+  --cw-v2-color-sidewalk: #f3f3f0;        /* warm gray — pre-auth + marketing */
+  --cw-v2-color-cream: #fbf8f2;            /* warm neutral surface */
+  --cw-v2-color-warm-blush: #f5ddd6;       /* soft warm wash */
+  --cw-v2-color-border: #d5d5ca;
+  --cw-v2-color-divider: #a0a0b0;
+
+  /* ── Text hierarchy ─────────────────────────────────────── */
+  --cw-v2-color-text-muted: #828294;
+  --cw-v2-color-text-subtle: #737385;
+  --cw-v2-color-text-light: #9292a3;
+  --cw-v2-color-text-caption: #6e6e80;
+
+  /* ── Brand ──────────────────────────────────────────────── */
+  --cw-v2-color-reliant-red: #e8735a;       /* PRIMARY — CTAs, ceremony eyebrows */
+  --cw-v2-color-reliant-red-hover: #c5624d;
+  --cw-v2-color-uniform-blue: #3590f3;      /* ACCENT — links, focus, selection */
+  --cw-v2-color-mint: #92e7e5;              /* decorative accent */
+  --cw-v2-color-sunny: #ffd166;             /* warning + highlight */
+  --cw-v2-color-spring: #4caf82;            /* success */
+  --cw-v2-color-purple: #8d63e0;            /* decorative accent */
+  --cw-v2-color-band-mint: #4ce0c6;
+  --cw-v2-color-band-blue: #5594ff;
+  --cw-v2-color-band-purple: #9966ff;
+  --cw-v2-color-danger: #dc2626;
+  --cw-v2-color-focus: #3590f3;
+
+  /* ── Blue scale ─────────────────────────────────────────── */
+  --cw-v2-color-blue-50: #e1eefd;
+  --cw-v2-color-blue-100: #c2defb;
+  --cw-v2-color-blue-200: #9ac8f9;
+  --cw-v2-color-blue-300: #72b1f7;
+  --cw-v2-color-blue-400: #499bf4;
+  --cw-v2-color-blue-500: #3590f3;
+  --cw-v2-color-blue-600: #2d7acf;
+  --cw-v2-color-blue-700: #2565aa;
+  --cw-v2-color-blue-800: #1b487a;
+  --cw-v2-color-blue-900: #102b49;
+
+  /* ── Coral scale ────────────────────────────────────────── */
+  --cw-v2-color-coral-50: #fceae6;
+  --cw-v2-color-coral-100: #f8d5ce;
+  --cw-v2-color-coral-200: #f4b9ad;
+  --cw-v2-color-coral-300: #ef9d8c;
+  --cw-v2-color-coral-400: #ea816b;
+  --cw-v2-color-coral-500: #e8735a;
+  --cw-v2-color-coral-600: #c5624d;
+  --cw-v2-color-coral-700: #a2513f;
+  --cw-v2-color-coral-800: #743a2d;
+  --cw-v2-color-coral-900: #46231b;
+
+  /* ── Mint scale ─────────────────────────────────────────── */
+  --cw-v2-color-mint-50: #effbfb;
+  --cw-v2-color-mint-100: #def8f7;
+  --cw-v2-color-mint-200: #c9f3f2;
+  --cw-v2-color-mint-300: #b3eeed;
+  --cw-v2-color-mint-400: #9de9e8;
+  --cw-v2-color-mint-500: #92e7e5;
+  --cw-v2-color-mint-600: #7cc4c3;
+  --cw-v2-color-mint-700: #66a2a0;
+  --cw-v2-color-mint-800: #497472;
+  --cw-v2-color-mint-900: #2c4545;
+
+  /* ── Sunny scale ────────────────────────────────────────── */
+  --cw-v2-color-sunny-50: #fff8e8;
+  --cw-v2-color-sunny-100: #fff1d1;
+  --cw-v2-color-sunny-200: #ffe8b3;
+  --cw-v2-color-sunny-300: #ffdf94;
+  --cw-v2-color-sunny-400: #ffd675;
+  --cw-v2-color-sunny-500: #ffd166;
+  --cw-v2-color-sunny-600: #d9b257;
+  --cw-v2-color-sunny-700: #b39247;
+  --cw-v2-color-sunny-800: #806933;
+  --cw-v2-color-sunny-900: #4d3f1f;
+
+  /* ── Green (spring) scale ───────────────────────────────── */
+  --cw-v2-color-green-50: #e4f3ec;
+  --cw-v2-color-green-100: #c9e7da;
+  --cw-v2-color-green-200: #a5d7c1;
+  --cw-v2-color-green-300: #82c7a8;
+  --cw-v2-color-green-400: #5eb78f;
+  --cw-v2-color-green-500: #4caf82;
+  --cw-v2-color-green-600: #41956f;
+  --cw-v2-color-green-700: #357a5b;
+  --cw-v2-color-green-800: #265741;
+  --cw-v2-color-green-900: #173427;
+
+  /* ── Purple scale ───────────────────────────────────────── */
+  --cw-v2-color-purple-50: #f0e9fb;
+  --cw-v2-color-purple-100: #dbcaff;
+  --cw-v2-color-purple-200: #c0a2ff;
+  --cw-v2-color-purple-300: #a579fd;
+  --cw-v2-color-purple-400: #8d63e0;
+  --cw-v2-color-purple-500: #8d63e0;
+  --cw-v2-color-purple-600: #7650c3;
+  --cw-v2-color-purple-700: #603ea5;
+  --cw-v2-color-purple-800: #4c2f88;
+  --cw-v2-color-purple-900: #3a216b;
+
+  /* ── Composite surface backgrounds (context-specific) ──── */
+  /* Dashboard / get-started canvas — uniform blue fade over white */
+  --cw-v2-dashboard-canvas-background:
+    linear-gradient(180deg, rgb(53 144 243 / 0) 23.76%, rgb(53 144 243 / 0.1) 100%), #ffffff; /* @kind color */
+  /* Owner dashboard body panel */
+  --cw-v2-owner-dashboard-body-background:
+    linear-gradient(180deg, rgb(225 238 253 / 0.15) 0%, rgb(225 238 253 / 0.3) 100%); /* @kind color */
+  --cw-v2-owner-dashboard-body-border: rgb(225 238 253 / 0.5);
+
+  /* ── Semantic aliases ───────────────────────────────────── */
+  --cw-v2-color-background: var(--cw-v2-color-sidewalk);
+  --cw-v2-color-surface: #ffffff;
+  --cw-v2-color-surface-raised: #ffffff;
+  --cw-v2-color-text: var(--cw-v2-color-ink);
+  --cw-v2-color-primary: var(--cw-v2-color-reliant-red);
+  --cw-v2-color-primary-hover: var(--cw-v2-color-reliant-red-hover);
+  --cw-v2-color-primary-text: #ffffff;
+  --cw-v2-color-secondary: var(--cw-v2-color-sidewalk);
+  --cw-v2-color-secondary-text: var(--cw-v2-color-text-subtle);
+  --cw-v2-color-accent: var(--cw-v2-color-uniform-blue);
+  --cw-v2-color-accent-text: #ffffff;
+  --cw-v2-color-success: var(--cw-v2-color-spring);
+  --cw-v2-color-warning: var(--cw-v2-color-sunny);
+}

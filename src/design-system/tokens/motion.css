@@ -1,0 +1,91 @@
+/**
+ * Cakewalk motion tokens.
+ *
+ * Brand easing is `ease-out-quart` cubic-bezier(0.22, 1, 0.36, 1).
+ * Peak–End wave: open BIG → calm → calm → PEAK → calm → close BIG.
+ * Asymmetric timing:
+ *   Micro 120–200ms · Meso 400–600ms · Macro 900–1400ms
+ */
+
+:root {
+  /* Durations */
+  --cw-v2-motion-duration-fast: 160ms; /* @kind other */   /* hover, focus, micro toggles */
+  --cw-v2-motion-duration-base: 240ms; /* @kind other */   /* popovers, dropdowns, dialogs */
+  --cw-v2-motion-duration-slow: 800ms; /* @kind other */   /* scroll-triggered reveals */
+  --cw-v2-motion-duration-hero: 1800ms; /* @kind other */  /* signature hero entrance */
+  --cw-v2-motion-duration-hover: 200ms; /* @kind other */
+
+  /* Easing — `out-quart` is the brand curve; use it everywhere by default */
+  --cw-v2-motion-ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --cw-v2-motion-ease-out-back: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --cw-v2-motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --cw-v2-motion-ease-linear: linear; /* @kind other */
+
+  /* Interactive card hover (frame-first — see motion principles §3.3) */
+  --cw-v2-interactive-border-hover: color-mix(
+    in srgb,
+    var(--cw-v2-color-accent) 45%,
+    var(--cw-v2-color-border)
+  );
+  --cw-v2-interactive-border-hover-subtle: color-mix(
+    in srgb,
+    var(--cw-v2-color-text) 22%,
+    var(--cw-v2-color-border)
+  );
+  --cw-v2-interactive-edge-accent: var(--cw-v2-color-accent); /* @kind color */
+  --cw-v2-interactive-tilt-x: 7deg; /* @kind other */
+  --cw-v2-interactive-tilt-y: -9deg; /* @kind other */
+  --cw-v2-interactive-scale-hover: 1.03; /* @kind other */
+  --cw-v2-interactive-perspective: 1200px; /* @kind other */
+}
+
+/* ── Keyframes ────────────────────────────────────────────── *
+ * `blur-in-up`: signature page-build entrance.
+ * `pop-in`:    docking checks, avatars (overshoot scale).
+ * `card-reveal`: 3D perspective for tile entrances at peak.
+ */
+
+@keyframes cw-v2-blur-in-up {
+  from {
+    opacity: 0;
+    filter: blur(16px);
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes cw-v2-pop-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes cw-v2-card-reveal {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(8deg) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes cw-v2-blur-in-up {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes cw-v2-pop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes cw-v2-card-reveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}

@@ -1,0 +1,12 @@
+/**
+ * Cakewalk webfonts.
+ *
+ * Plus Jakarta Sans — UI / headings (400/500/600/700/800)
+ * IBM Plex Mono     — eyebrows, ceremony, metadata accents (400/500/600/700)
+ *
+ * Both are served by Google Fonts at runtime; the system never ships local
+ * .woff2 binaries. If you need true offline support, vendor them under
+ * `assets/fonts/` and replace the @import below with @font-face rules.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap");

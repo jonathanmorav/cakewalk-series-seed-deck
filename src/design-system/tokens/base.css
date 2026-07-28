@@ -1,0 +1,55 @@
+/**
+ * Base — applies sensible body defaults so any plain HTML page that links
+ * styles.css inherits the Cakewalk look. Components and cards override
+ * locally; this file never sets layout (no padding/margin on body).
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--cw-v2-font-sans);
+  font-size: var(--cw-v2-font-size-body);
+  line-height: var(--cw-v2-line-height-body);
+  color: var(--cw-v2-color-text);
+  background: var(--cw-v2-color-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--cw-v2-color-primary) 30%, transparent);
+  color: var(--cw-v2-color-ink);
+}
+
+a {
+  color: var(--cw-v2-color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color var(--cw-v2-motion-duration-fast) var(--cw-v2-motion-ease-out-quart);
+}
+a:hover {
+  color: var(--cw-v2-color-blue-700);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--cw-v2-shadow-focus);
+  border-radius: var(--cw-v2-radius-sm);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--cw-v2-color-border);
+  margin: 0;
+}
