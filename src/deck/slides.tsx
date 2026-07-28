@@ -1,25 +1,62 @@
 /* eslint-disable react-refresh/only-export-components -- this is the intentional single-file deck authoring surface */
+import { useEffect, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BookOpenText,
   Boxes,
-  Check,
   CloudUpload,
   Code2,
   FileText,
-  Heart,
   Keyboard,
   Layers3,
   Link2,
   MonitorPlay,
   PackageCheck,
-  ShieldCheck,
   Sparkles,
   Users,
   Workflow,
 } from "lucide-react";
 import type { DeckSlide } from "./types";
+
+interface DeckMonth {
+  label: string;
+  dateTime: string;
+}
+
+export function formatDeckMonth(date: Date): DeckMonth {
+  return {
+    label: new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric",
+    }).format(date),
+    dateTime: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
+  };
+}
+
+function CurrentDeckMonth() {
+  const [month, setMonth] = useState(() => formatDeckMonth(new Date()));
+
+  useEffect(() => {
+    const syncMonth = () => setMonth(formatDeckMonth(new Date()));
+    const interval = window.setInterval(syncMonth, 60 * 60 * 1000);
+
+    window.addEventListener("focus", syncMonth);
+    document.addEventListener("visibilitychange", syncMonth);
+
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("focus", syncMonth);
+      document.removeEventListener("visibilitychange", syncMonth);
+    };
+  }, []);
+
+  return (
+    <time className="investor-cover__date" dateTime={month.dateTime}>
+      {month.label}
+    </time>
+  );
+}
 
 function Eyebrow({ children }: { children: string }) {
   return <p className="eyebrow">{children}</p>;
@@ -49,49 +86,20 @@ function FeatureCard({ icon: Icon, title, children }: { icon: LucideIcon; title:
 
 function CoverSlide() {
   return (
-    <div className="cover-grid">
-      <div className="cover-copy">
-        <Eyebrow>CAKEWALK DECK STARTER</Eyebrow>
-        <h1 className="hero-title">
-          Build benefits your team will <em>actually use.</em>
+    <div className="investor-cover">
+      <div className="investor-cover__copy">
+        <span className="investor-cover__rule" aria-hidden="true" />
+        <h1 className="investor-cover__title">
+          <span>Series Seed</span>
+          <span>Investor Deck</span>
         </h1>
-        <p className="hero-lead">
-          A browser-native presentation system for clear stories, confident delivery, and effortless publishing.
-        </p>
-        <div className="tag-row" aria-label="Deck capabilities">
-          <span>React</span>
-          <span>16:9</span>
-          <span>GitHub Pages</span>
-        </div>
+        <CurrentDeckMonth />
       </div>
 
-      <div className="cover-visual" aria-label="Example Cakewalk benefits card">
-        <div className="visual-orbit visual-orbit--one" aria-hidden="true" />
-        <div className="visual-orbit visual-orbit--two" aria-hidden="true" />
-        <article className="benefits-card">
-          <header>
-            <div>
-              <span className="mini-overline">YOUR BENEFITS</span>
-              <h2>Everything in one place.</h2>
-            </div>
-            <span className="status-dot" aria-label="Active" />
-          </header>
-          <div className="benefit-row">
-            <span className="benefit-icon benefit-icon--coral"><Heart aria-hidden="true" /></span>
-            <span><strong>Health</strong><small>Coverage that fits</small></span>
-            <Check aria-hidden="true" />
-          </div>
-          <div className="benefit-row">
-            <span className="benefit-icon benefit-icon--blue"><ShieldCheck aria-hidden="true" /></span>
-            <span><strong>Dental + vision</strong><small>Simple add-ons</small></span>
-            <Check aria-hidden="true" />
-          </div>
-          <div className="benefit-row">
-            <span className="benefit-icon benefit-icon--mint"><Users aria-hidden="true" /></span>
-            <span><strong>Your team</strong><small>Invited and ready</small></span>
-            <Check aria-hidden="true" />
-          </div>
-        </article>
+      <div className="investor-cover__motif" aria-hidden="true">
+        <span className="investor-cover__orbit investor-cover__orbit--outer" />
+        <span className="investor-cover__orbit investor-cover__orbit--inner" />
+        <span className="investor-cover__seed" />
       </div>
     </div>
   );
@@ -259,10 +267,10 @@ function ClosingSlide() {
 export const slides: DeckSlide[] = [
   {
     id: "cover",
-    title: "Build benefits your team will actually use",
-    section: "Cakewalk deck starter",
+    title: "Series Seed Investor Deck",
+    section: "Cover slide",
     tone: "canvas",
-    notes: "Open with the outcome. The deck itself should disappear behind the conversation.",
+    notes: "Welcome the room and introduce the Series Seed story.",
     render: () => <CoverSlide />,
   },
   {
