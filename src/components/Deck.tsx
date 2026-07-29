@@ -228,7 +228,7 @@ export function Deck({ slides }: DeckProps) {
         {slides.map((slide, index) => (
           <div className="print-page" key={slide.id}>
             <SlideFrame slide={slide} index={index} total={slides.length}>
-              {slide.render()}
+              {slide.renderPrint?.() ?? slide.render()}
             </SlideFrame>
           </div>
         ))}

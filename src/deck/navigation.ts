@@ -25,7 +25,7 @@ export function isInteractiveTarget(target: EventTarget | null) {
 
   return Boolean(
     target.closest(
-      "a, button, input, textarea, select, summary, [contenteditable='true'], [role='button'], [role='link'], [role='menuitem']",
+      "a, button, iframe, input, textarea, select, summary, [data-deck-interactive], [contenteditable='true'], [role='button'], [role='link'], [role='menuitem']",
     ),
   );
 }

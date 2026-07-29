@@ -10,4 +10,5 @@ export interface DeckSlide {
   brandPlacement?: "header" | "footer";
   notes?: string;
   render: () => ReactNode;
+  renderPrint?: () => ReactNode;
 }
