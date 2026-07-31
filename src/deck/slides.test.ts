@@ -6,6 +6,7 @@ import {
   formatDeckMonth,
   projectionRows,
   projectionYears,
+  productDemos,
   raiseTerms,
   slides,
   tamMarketSegments,
@@ -29,10 +30,16 @@ describe("slide registry", () => {
   it("keeps the interactive Cakewalk product tour on slide five", () => {
     expect(slides[4]).toMatchObject({
       id: "cakewalk",
-      title: "Cakewalk Enterprise Quality Benefits, Without Friction",
+      title: "Cakewalk Enterprise Quality Benefits, Made Effortless",
       section: "The product",
     });
     expect(slides[4].renderPrint).toBeTypeOf("function");
+    expect(productDemos.map(({ id }) => id)).toEqual([
+      "business-onboarding",
+      "owner-dashboard",
+      "benefits-wallet",
+      "member-enrollment",
+    ]);
   });
 
   it("places the sourced total addressable market story on slide six", () => {

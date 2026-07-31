@@ -7,6 +7,7 @@ import {
   LockKeyhole,
   RefreshCw,
 } from "lucide-react";
+import { BusinessOnboardingAutoplay } from "../components/BusinessOnboardingAutoplay";
 import type { DeckSlide } from "./types";
 
 interface DeckMonth {
@@ -150,7 +151,12 @@ function BurdenSlide() {
   );
 }
 
-const productDemos = [
+export const productDemos = [
+  {
+    id: "business-onboarding",
+    label: "Business Onboarding",
+    url: "https://demo.cakewalkbenefits.com/business-activation-zero-entry?order=census-first&devtools=1",
+  },
   {
     id: "owner-dashboard",
     label: "Owner Dashboard",
@@ -166,16 +172,16 @@ const productDemos = [
     label: "Member Enrollment",
     url: "https://demo.cakewalkbenefits.com/enrollment-intro?devtools=1&enrollsim=1",
   },
-  {
-    id: "business-onboarding",
-    label: "Business Onboarding",
-    url: "https://demo.cakewalkbenefits.com/business-activation-zero-entry?order=census-first&devtools=1",
-  },
 ] as const;
 
 function compactDemoUrl(url: string) {
   const parsed = new URL(url);
   return `${parsed.hostname}${parsed.pathname === "/" ? "" : parsed.pathname}`;
+}
+
+function initialProductDemoId() {
+  const requestedDemoId = new URLSearchParams(window.location.search).get("demo");
+  return productDemos.find(({ id }) => id === requestedDemoId)?.id ?? productDemos[0].id;
 }
 
 function ProductBrowserHeadline() {
@@ -187,14 +193,14 @@ function ProductBrowserHeadline() {
         alt="Cakewalk"
       />
       <span>
-        Enterprise Quality Benefits, <em>Without Friction.</em>
+        Enterprise Quality Benefits, <em>Made Effortless.</em>
       </span>
     </h1>
   );
 }
 
 function ProductBrowserSlide() {
-  const [activeDemoId, setActiveDemoId] = useState<(typeof productDemos)[number]["id"]>(productDemos[0].id);
+  const [activeDemoId, setActiveDemoId] = useState<(typeof productDemos)[number]["id"]>(initialProductDemoId);
   const [reloadKey, setReloadKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const tabGroupId = useId();
@@ -202,7 +208,7 @@ function ProductBrowserSlide() {
 
   const selectDemo = (demoId: (typeof productDemos)[number]["id"]) => {
     setActiveDemoId(demoId);
-    setIsLoading(true);
+    setIsLoading(demoId !== "business-onboarding");
   };
 
   const focusDemo = (index: number) => {
@@ -276,7 +282,7 @@ function ProductBrowserSlide() {
             aria-label={`Reload ${activeDemo.label}`}
             onClick={() => {
               setReloadKey((key) => key + 1);
-              setIsLoading(true);
+              setIsLoading(activeDemo.id !== "business-onboarding");
             }}
           >
             <RefreshCw aria-hidden="true" />
@@ -299,23 +305,29 @@ function ProductBrowserSlide() {
           role="tabpanel"
           aria-labelledby={`${tabGroupId}-${activeDemo.id}`}
         >
-          {isLoading && (
-            <div className="product-browser__loading" aria-live="polite">
-              <img src={`${import.meta.env.BASE_URL}brand/cakewalk-mark.svg`} alt="" aria-hidden="true" />
-              <span>Opening {activeDemo.label}</span>
-            </div>
+          {activeDemo.id === "business-onboarding" ? (
+            <BusinessOnboardingAutoplay key={reloadKey} />
+          ) : (
+            <>
+              {isLoading && (
+                <div className="product-browser__loading" aria-live="polite">
+                  <img src={`${import.meta.env.BASE_URL}brand/cakewalk-mark.svg`} alt="" aria-hidden="true" />
+                  <span>Opening {activeDemo.label}</span>
+                </div>
+              )}
+              <iframe
+                key={`${activeDemo.id}-${reloadKey}`}
+                className="product-browser__iframe"
+                src={activeDemo.url}
+                title={`${activeDemo.label} demo`}
+                loading="eager"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="clipboard-read; clipboard-write; fullscreen"
+                allowFullScreen
+                onLoad={() => setIsLoading(false)}
+              />
+            </>
           )}
-          <iframe
-            key={`${activeDemo.id}-${reloadKey}`}
-            className="product-browser__iframe"
-            src={activeDemo.url}
-            title={`${activeDemo.label} demo`}
-            loading="eager"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allow="clipboard-read; clipboard-write; fullscreen"
-            allowFullScreen
-            onLoad={() => setIsLoading(false)}
-          />
         </div>
       </section>
     </div>
@@ -361,7 +373,7 @@ function ProductBrowserPrintSlide() {
             <img src={`${import.meta.env.BASE_URL}brand/cakewalk-mark.svg`} alt="" aria-hidden="true" />
             <span className="mini-overline">PRODUCT TOUR</span>
             <h2>Four connected Cakewalk experiences.</h2>
-            <p>Owner Dashboard · Benefits Wallet · Member Enrollment · Business Onboarding</p>
+            <p>Business Onboarding · Owner Dashboard · Benefits Wallet · Member Enrollment</p>
           </div>
         </div>
       </section>
@@ -933,7 +945,7 @@ export const slides: DeckSlide[] = [
   },
   {
     id: "cakewalk",
-    title: "Cakewalk Enterprise Quality Benefits, Without Friction",
+    title: "Cakewalk Enterprise Quality Benefits, Made Effortless",
     section: "The product",
     tone: "canvas",
     brandPlacement: "footer",
