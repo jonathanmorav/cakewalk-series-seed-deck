@@ -134,8 +134,12 @@ describe("slides eleven through fourteen content", () => {
 });
 
 describe("team and board profiles", () => {
-  it("keeps Lucas Milliron's leadership card name-only", () => {
-    expect(teamMembers[2]).toEqual({ name: "Lucas Milliron" });
+  it("keeps Lucas Milliron's leadership card ready for future highlights", () => {
+    expect(teamMembers[2]).toEqual({
+      name: "Lucas Milliron",
+      title: "Chief Technology Officer",
+      highlights: ["", "", ""],
+    });
     expect(teamMembers.map(({ name }) => name)).not.toContain("Niv Ben-Dor");
   });
 

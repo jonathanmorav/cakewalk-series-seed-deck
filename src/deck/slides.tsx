@@ -613,6 +613,8 @@ export const teamMembers: readonly PersonProfile[] = [
   },
   {
     name: "Lucas Milliron",
+    title: "Chief Technology Officer",
+    highlights: ["", "", ""],
   },
 ];
 
@@ -664,10 +666,11 @@ function PeopleSlide({
       <div className="people-grid" aria-label={title}>
         {people.map((person, index) => {
           const isNameOnly = !person.image && !person.title && !person.highlights?.length;
+          const hasAvatarPlaceholder = !person.image && !isNameOnly;
 
           return (
             <article
-              className={`person-card${isNameOnly ? " person-card--name-only" : ""}`}
+              className={`person-card${isNameOnly ? " person-card--name-only" : ""}${hasAvatarPlaceholder ? " person-card--placeholder" : ""}`}
               key={person.name}
               style={{ animationDelay: `${180 + index * 80}ms` }}
             >
@@ -677,10 +680,14 @@ function PeopleSlide({
                 <>
                   <p className="person-card__eyebrow">{eyebrow}</p>
                   <div className="person-card__identity">
-                    <img
-                      src={`${import.meta.env.BASE_URL}${person.image}`}
-                      alt={`${person.name} headshot`}
-                    />
+                    {person.image ? (
+                      <img
+                        src={`${import.meta.env.BASE_URL}${person.image}`}
+                        alt={`${person.name} headshot`}
+                      />
+                    ) : (
+                      <span className="person-card__avatar-placeholder" aria-hidden="true" />
+                    )}
                     <div>
                       <h2>{person.name}</h2>
                       <p className="person-card__title">{person.title}</p>
@@ -688,10 +695,10 @@ function PeopleSlide({
                   </div>
                   {person.highlights?.length ? (
                     <ul className="person-card__highlights">
-                      {person.highlights.map((highlight) => (
-                        <li key={highlight}>
+                      {person.highlights.map((highlight, highlightIndex) => (
+                        <li key={`${person.name}-${highlightIndex}`}>
                           <span aria-hidden="true"><Check /></span>
-                          <p>{highlight}</p>
+                          <p>{highlight || "\u00a0"}</p>
                         </li>
                       ))}
                     </ul>
@@ -968,7 +975,7 @@ export const slides: DeckSlide[] = [
     section: "Team",
     tone: "canvas",
     brandPlacement: "footer",
-    notes: "Introduce the operating and insurance leadership behind Cakewalk. The third leadership card is intentionally reserved for Lucas Milliron's details.",
+    notes: "Introduce the operating and insurance leadership behind Cakewalk, including Lucas Milliron as Chief Technology Officer.",
     render: () => <TeamSlide />,
   },
   {

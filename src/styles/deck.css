@@ -1533,14 +1533,24 @@ button.product-browser__tab {
   gap: clamp(11px, 1.15cqw, 18px);
 }
 
-.person-card__identity img {
+.person-card__identity img,
+.person-card__avatar-placeholder {
   width: clamp(50px, 5cqw, 72px);
   aspect-ratio: 1;
   flex: 0 0 auto;
   border: 2px solid white;
   border-radius: var(--cw-v2-radius-full);
-  object-fit: cover;
   box-shadow: 0 5px 16px rgb(26 26 46 / 0.14);
+}
+
+.person-card__identity img {
+  object-fit: cover;
+}
+
+.person-card__avatar-placeholder {
+  background:
+    radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.88), transparent 38%),
+    var(--cw-v2-color-mint-100);
 }
 
 .person-card h2 {
@@ -2603,7 +2613,8 @@ button.product-browser__tab {
     gap: 10px;
   }
 
-  .person-card__identity img {
+  .person-card__identity img,
+  .person-card__avatar-placeholder {
     width: 48px;
   }
 
@@ -3246,7 +3257,8 @@ button.product-browser__tab {
     gap: 12px;
   }
 
-  .person-card__identity img {
+  .person-card__identity img,
+  .person-card__avatar-placeholder {
     width: 50px;
   }
 
@@ -3266,6 +3278,10 @@ button.product-browser__tab {
 
   .person-card__highlights li:nth-child(n + 3) {
     display: none;
+  }
+
+  .person-card--placeholder .person-card__highlights li:nth-child(n + 3) {
+    display: grid;
   }
 
   .person-card--name-only {
