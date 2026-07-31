@@ -652,7 +652,7 @@ export const boardDirectors: readonly PersonProfile[] = [
     title: "Board Director",
     image: "people/board-mona.png",
     highlights: [
-      "Founder & Chief Executive Officer, Clear Point",
+      "Chief Executive Officer, Clear Point",
       "Founder & Chief Executive Officer, Eliassen Group",
     ],
   },
@@ -902,7 +902,15 @@ function ConclusionSlide() {
   return (
     <div className="closing-atmosphere conclusion-slide">
       <h1>{conclusionCopy[0]}</h1>
-      <h2>{conclusionCopy[1]}</h2>
+      <h2 aria-label={conclusionCopy[1]}>
+        <span aria-hidden="true">We&apos;re making it a</span>
+        <img
+          className="conclusion-slide__logo"
+          src={`${import.meta.env.BASE_URL}brand/cakewalk-logo-orange.svg`}
+          alt=""
+          aria-hidden="true"
+        />
+      </h2>
     </div>
   );
 }

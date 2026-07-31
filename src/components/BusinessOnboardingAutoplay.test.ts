@@ -37,11 +37,22 @@ describe("BusinessOnboardingAutoplay", () => {
 
   it("uses the seeded company and valid demo-only verification values", () => {
     expect(businessOnboardingDemoData.company).toBe("Northside Veterinary Clinic");
+    expect(businessOnboardingDemoData).toMatchObject({
+      category: "Veterinary Care",
+      phone: "(423) 509-0142",
+      website: "northsidevet.com",
+      industryCode: "SIC 0742",
+      industry: "Veterinary Services for Animal Specialties",
+    });
     expect(businessOnboardingDemoData.workEmail).toMatch(/@northsidevet\.com$/);
     expect(businessOnboardingDemoData.adminEmail).toMatch(/@northsidevet\.com$/);
     expect(businessOnboardingDemoData.password.length).toBeGreaterThanOrEqual(4);
     expect(businessOnboardingDemoData.verificationCode).toMatch(/^\d{6}$/);
     expect(businessOnboardingDemoData.verificationCode).not.toBe("000000");
+  });
+
+  it("leaves enough time for the AI industry analysis to resolve before confirmation", () => {
+    expect(businessOnboardingScenes[1]).toEqual({ id: "company-confirmation", duration: 4_400 });
   });
 
   it("keeps the recommendation, contribution split, and locked quote in shared workflow data", () => {

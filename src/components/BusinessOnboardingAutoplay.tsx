@@ -1,13 +1,19 @@
 import { useEffect, useState, type ReactNode } from "react";
 import {
+  BriefcaseBusiness,
   Building2,
   Check,
   ChevronRight,
   CirclePause,
   CirclePlay,
+  Globe2,
+  LoaderCircle,
   LockKeyhole,
   Mail,
+  MapPin,
   MousePointer2,
+  PencilLine,
+  Phone,
   Search,
   ShieldCheck,
   Sparkles,
@@ -21,6 +27,9 @@ import {
   getBusinessOnboardingFrame,
   type BusinessOnboardingFrame,
 } from "./businessOnboardingWorkflow";
+
+const onboardingHeroImageSrc = "https://demo.cakewalkbenefits.com/images/get-started/hero-background.jpg";
+const quickBooksLogoSrc = "https://demo.cakewalkbenefits.com/payroll-logos/quickbooks.png";
 
 function formatMoney(value: number) {
   return `$${value.toLocaleString("en-US")}`;
@@ -46,6 +55,14 @@ function DemoPointer({ pressing = false }: { pressing?: boolean }) {
   return (
     <span className={`business-onboarding__pointer${pressing ? " business-onboarding__pointer--pressing" : ""}`} aria-hidden="true">
       <MousePointer2 />
+    </span>
+  );
+}
+
+function QuickBooksLogo({ size }: { size: "card" | "lockup" | "heading" }) {
+  return (
+    <span className={`business-onboarding__quickbooks-logo business-onboarding__quickbooks-logo--${size}`}>
+      <img src={quickBooksLogoSrc} alt="" aria-hidden="true" />
     </span>
   );
 }
@@ -106,32 +123,53 @@ function CompanySearch({ progress }: { progress: number }) {
 }
 
 function CompanyConfirmation({ progress }: { progress: number }) {
+  const isAnalyzing = progress < 0.58;
+
   return (
     <div className="business-onboarding__scene business-onboarding__scene--confirmation">
       <span className="business-onboarding__eyebrow">Your company</span>
       <h2>Is this your business?</h2>
-      <p>We pulled this from public records. Give it a quick look before we build your quote.</p>
+      <p>We pulled this from public records. Give it a quick look and fix anything that&apos;s off before we build your quote.</p>
 
       <article className="business-onboarding__company-card">
-        <div>
+        <header className="business-onboarding__company-card-header">
           <span className="business-onboarding__result-mark"><Building2 /></span>
-          <span>
+          <span className="business-onboarding__company-identity">
             <strong>{businessOnboardingDemoData.company}</strong>
-            <small>Veterinary Care · Verified profile</small>
+            <small>{businessOnboardingDemoData.category}</small>
           </span>
-        </div>
+          <span className="business-onboarding__verified"><Check /> Verified profile</span>
+        </header>
+        <div className="business-onboarding__ai-source"><Sparkles /> Cakewalk AI · pre-filled from your profile</div>
         <dl>
-          <div><dt>Business address</dt><dd>{businessOnboardingDemoData.address}</dd></div>
-          <div><dt>Website</dt><dd>northsidevet.com</dd></div>
-          <div><dt>Legal entity</dt><dd>Northside Veterinary Clinic, Inc.</dd></div>
+          <div><dt><MapPin /> Business address</dt><dd>{businessOnboardingDemoData.address}</dd></div>
+          <div><dt><Phone /> Phone</dt><dd>{businessOnboardingDemoData.phone}</dd></div>
+          <div><dt><Globe2 /> Website</dt><dd>{businessOnboardingDemoData.website}</dd></div>
+          <div><dt><Building2 /> Legal entity</dt><dd>{businessOnboardingDemoData.legalEntity}</dd></div>
+          <div className="business-onboarding__industry-row">
+            <dt><BriefcaseBusiness /> Industry</dt>
+            <dd>
+              {isAnalyzing ? (
+                <span className="business-onboarding__analysis-status"><LoaderCircle /> Analyzing your business…</span>
+              ) : (
+                <span className="business-onboarding__industry-match">
+                  <span><small>{businessOnboardingDemoData.industryCode}</small>{businessOnboardingDemoData.industry}</span>
+                  <button type="button" tabIndex={-1}><PencilLine /> Change</button>
+                </span>
+              )}
+            </dd>
+          </div>
         </dl>
       </article>
 
-      <button className="business-onboarding__primary business-onboarding__target" type="button" tabIndex={-1}>
-        This is my business — continue
-        <ChevronRight aria-hidden="true" />
-        <DemoPointer pressing={progress > 0.76} />
-      </button>
+      <div className="business-onboarding__company-actions">
+        <button className="business-onboarding__primary business-onboarding__target" type="button" tabIndex={-1} disabled={isAnalyzing}>
+          This is my business — continue
+          <ChevronRight aria-hidden="true" />
+          {!isAnalyzing && <DemoPointer pressing={progress > 0.9} />}
+        </button>
+        <button className="business-onboarding__secondary" type="button" tabIndex={-1}>Not quite</button>
+      </div>
     </div>
   );
 }
@@ -190,9 +228,13 @@ function PayrollSelection({ progress }: { progress: number }) {
             className={`business-onboarding__provider${index === 0 ? " business-onboarding__target business-onboarding__provider--active" : ""}`}
             key={provider.name}
           >
-            <span className={`business-onboarding__provider-mark business-onboarding__provider-mark--${provider.tone}`}>
-              {provider.mark}
-            </span>
+            {index === 0 ? (
+              <QuickBooksLogo size="card" />
+            ) : (
+              <span className={`business-onboarding__provider-mark business-onboarding__provider-mark--${provider.tone}`}>
+                {provider.mark}
+              </span>
+            )}
             <strong>{provider.name}</strong>
             <small>{index === 0 ? "Your team and pay info — already in QuickBooks." : "Import your roster in one step."}</small>
             <span className="business-onboarding__connect">Connect</span>
@@ -219,7 +261,7 @@ function VerificationModal({ mode, progress }: { mode: "email" | "code"; progres
       </div>
       <section className="business-onboarding__modal-card">
         <div className="business-onboarding__integration-lockup">
-          <span className="business-onboarding__provider-mark business-onboarding__provider-mark--green">qb</span>
+          <QuickBooksLogo size="lockup" />
           <span className="business-onboarding__integration-line" />
           <img src={`${import.meta.env.BASE_URL}brand/cakewalk-mark.svg`} alt="" aria-hidden="true" />
         </div>
@@ -271,7 +313,7 @@ function ProviderModal({ mode, progress }: { mode: "overview" | "login" | "impor
       </div>
       <section className="business-onboarding__modal-card business-onboarding__modal-card--provider">
         <div className="business-onboarding__provider-heading">
-          <span className="business-onboarding__provider-mark business-onboarding__provider-mark--green">qb</span>
+          <QuickBooksLogo size="heading" />
           <span><small>Secure provider connection</small><strong>Connect QuickBooks Payroll</strong></span>
         </div>
         <ol className="business-onboarding__provider-progress">
@@ -780,6 +822,7 @@ export function BusinessOnboardingAutoplay() {
       </div>
 
       <main className="business-onboarding__stage" aria-live="off">
+        <img className="business-onboarding__stage-background" src={onboardingHeroImageSrc} alt="" aria-hidden="true" />
         <OnboardingScene frame={frame} />
       </main>
 

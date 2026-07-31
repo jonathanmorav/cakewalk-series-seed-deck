@@ -1,6 +1,12 @@
 export const businessOnboardingDemoData = {
   company: "Northside Veterinary Clinic",
   address: "1248 Hixson Pike, Chattanooga, TN 37405",
+  category: "Veterinary Care",
+  phone: "(423) 509-0142",
+  website: "northsidevet.com",
+  legalEntity: "Northside Veterinary Clinic, Inc.",
+  industryCode: "SIC 0742",
+  industry: "Veterinary Services for Animal Specialties",
   workEmail: "alex@northsidevet.com",
   adminEmail: "demo@northsidevet.com",
   password: "Northside2026!",
@@ -71,7 +77,7 @@ export const businessOnboardingQuoteData = {
 
 export const businessOnboardingScenes = [
   { id: "company-search", duration: 4_200 },
-  { id: "company-confirmation", duration: 2_700 },
+  { id: "company-confirmation", duration: 4_400 },
   { id: "team-explanation", duration: 2_800 },
   { id: "payroll-selection", duration: 2_800 },
   { id: "account-email", duration: 3_000 },
