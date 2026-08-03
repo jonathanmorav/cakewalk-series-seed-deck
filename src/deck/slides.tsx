@@ -605,7 +605,7 @@ function TamSlide({ forceSources = false }: { forceSources?: boolean }) {
             </article>
           ))}
           <article className="tam-market__legend-item tam-market__legend-item--workforce">
-            <span className="tam-market__workforce-value">38.85%</span>
+            <span className="tam-market__workforce-value">39%</span>
             <p>of the U.S. labor force works at businesses with 50 or fewer employees.</p>
           </article>
         </div>
@@ -1038,7 +1038,7 @@ function TheAskSlide() {
 }
 
 export const conclusionCopy = [
-  "Every employee deserves great benefits.",
+  "Every small business deserves great benefits.",
   "We're making it a Cakewalk.",
 ] as const;
 
@@ -1180,7 +1180,7 @@ export const slides: DeckSlide[] = [
   },
   {
     id: "conclusion",
-    title: "Every employee deserves great benefits",
+    title: "Every small business deserves great benefits",
     section: "Conclusion",
     tone: "canvas",
     brandPlacement: "footer",

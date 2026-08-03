@@ -519,7 +519,7 @@ a:focus-visible {
 
 .benefits-chaos__orbit {
   fill: none;
-  stroke: rgb(53 144 243 / 0.24);
+  stroke: rgb(53 144 243 / 0.34);
   stroke-dasharray: 5 10;
   stroke-width: 1.4;
   vector-effect: non-scaling-stroke;
@@ -530,13 +530,13 @@ a:focus-visible {
 }
 
 .benefits-chaos__orbit--inner {
-  stroke: rgb(232 115 90 / 0.22);
+  stroke: rgb(232 115 90 / 0.32);
   stroke-dasharray: 3 9;
 }
 
 .benefits-chaos__line {
   fill: none;
-  opacity: 0.54;
+  opacity: 0.68;
   stroke-dasharray: 4 10;
   stroke-linecap: round;
   stroke-width: 1.4;
@@ -560,7 +560,7 @@ a:focus-visible {
 }
 
 .benefits-chaos__line--return {
-  opacity: 0.3;
+  opacity: 0.42;
   stroke: var(--cw-v2-color-coral-500);
   stroke-dasharray: 2 12;
 }
@@ -755,7 +755,7 @@ a:focus-visible {
   border: 1px solid rgb(232 115 90 / 0.46);
   border-radius: 50%;
   opacity: 0;
-  animation: benefits-pressure 14s var(--cw-v2-motion-ease-out-quart) infinite;
+  animation: benefits-pressure 3.5s var(--cw-v2-motion-ease-out-quart) infinite;
 }
 
 .benefits-chaos__pressure span:nth-child(2) {
@@ -3666,6 +3666,7 @@ button.product-browser__tab {
 .competitive-table__row {
   min-height: clamp(50px, 6.7cqh, 72px);
   padding: clamp(3px, 0.45cqh, 6px) clamp(6px, 0.8cqw, 12px);
+  border-top: 1px solid var(--cw-v2-color-border);
   animation: competitive-row-arrive 420ms var(--cw-v2-motion-ease-out-quart) both;
 }
 
@@ -4295,7 +4296,7 @@ button.product-browser__tab {
 
 .conclusion-slide h2 {
   display: flex;
-  margin-top: clamp(13px, 2cqh, 20px);
+  margin-top: clamp(30px, 4.4cqh, 46px);
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -5879,7 +5880,7 @@ button.product-browser__tab {
   }
 
   .conclusion-slide h2 {
-    margin-top: 16px;
+    margin-top: 28px;
     font-size: clamp(23px, 6.7vw, 30px);
     line-height: 1.16;
   }

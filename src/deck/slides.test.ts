@@ -156,7 +156,7 @@ describe("slides eleven through fourteen content", () => {
       previousCapital: "$1.2M total capital invested",
     });
     expect(conclusionCopy).toEqual([
-      "Every employee deserves great benefits.",
+      "Every small business deserves great benefits.",
       "We're making it a Cakewalk.",
     ]);
   });
