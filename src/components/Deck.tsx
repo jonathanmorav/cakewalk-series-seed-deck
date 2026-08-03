@@ -21,10 +21,21 @@ const shortcuts = [
   ["→ / ↓ / Space", "Next slide"],
   ["← / ↑ / Shift + Space", "Previous slide"],
   ["Home / End", "First / last slide"],
-  ["O", "Slide overview"],
+  ["O", "Section navigation"],
   ["F", "Fullscreen"],
   ["?", "Keyboard shortcuts"],
 ];
+
+const sectionNavigationLabels: Record<string, string> = {
+  cover: "Cover",
+  cakewalk: "Cakewalk",
+  flow: "The Need",
+  system: "The Solution",
+};
+
+function getSectionNavigationLabel(slide: DeckSlide) {
+  return sectionNavigationLabels[slide.id] ?? slide.section;
+}
 
 export function Deck({ slides }: DeckProps) {
   const { currentIndex, currentSlide, direction, goTo, next, previous, first, last } = useDeckNavigation(slides);
@@ -32,7 +43,17 @@ export function Deck({ slides }: DeckProps) {
   const [helpOpen, setHelpOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(Boolean(document.fullscreenElement));
   const touchStartRef = useRef<TouchStart | null>(null);
+  const sectionNavigationRef = useRef<HTMLElement | null>(null);
+  const sectionNavigationTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const activeSectionRef = useRef<HTMLButtonElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  const closeSectionNavigation = useCallback((restoreFocus = false) => {
+    setOverviewOpen(false);
+    if (restoreFocus) {
+      window.requestAnimationFrame(() => sectionNavigationTriggerRef.current?.focus());
+    }
+  }, []);
 
   const toggleFullscreen = useCallback(async () => {
     try {
@@ -60,15 +81,21 @@ export function Deck({ slides }: DeckProps) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOverviewOpen(false);
+        closeSectionNavigation(overviewOpen);
         setHelpOpen(false);
+        return;
+      }
+
+      const key = event.key.toLowerCase();
+      if (overviewOpen && key === "o" && !event.metaKey && !event.ctrlKey && !event.altKey) {
+        event.preventDefault();
+        closeSectionNavigation(true);
         return;
       }
 
       if (overviewOpen || helpOpen || event.metaKey || event.ctrlKey || event.altKey) return;
       if (isInteractiveTarget(event.target)) return;
 
-      const key = event.key.toLowerCase();
       if (["arrowright", "arrowdown", "pagedown"].includes(key)) {
         event.preventDefault();
         next();
@@ -99,7 +126,30 @@ export function Deck({ slides }: DeckProps) {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [first, helpOpen, last, next, overviewOpen, previous, toggleFullscreen]);
+  }, [closeSectionNavigation, first, helpOpen, last, next, overviewOpen, previous, toggleFullscreen]);
+
+  useEffect(() => {
+    if (!overviewOpen) return;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      activeSectionRef.current?.scrollIntoView({ block: "nearest" });
+      activeSectionRef.current?.focus({ preventScroll: true });
+    });
+
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (sectionNavigationRef.current?.contains(target)) return;
+      if (target instanceof Element && target.closest('[aria-controls="section-navigation"]')) return;
+      closeSectionNavigation();
+    };
+
+    document.addEventListener("pointerdown", closeOnOutsidePointer);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("pointerdown", closeOnOutsidePointer);
+    };
+  }, [closeSectionNavigation, currentIndex, overviewOpen]);
 
   const onTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     const touch = event.changedTouches[0];
@@ -155,10 +205,11 @@ export function Deck({ slides }: DeckProps) {
           currentIndex={currentIndex}
           total={slides.length}
           isFullscreen={isFullscreen}
+          overviewOpen={overviewOpen}
+          overviewButtonRef={sectionNavigationTriggerRef}
           onPrevious={previous}
           onNext={next}
-          onOverview={() => setOverviewOpen(true)}
-          onHelp={() => setHelpOpen(true)}
+          onOverview={() => setOverviewOpen((open) => !open)}
           onFullscreen={() => void toggleFullscreen()}
         />
 
@@ -175,36 +226,37 @@ export function Deck({ slides }: DeckProps) {
         </div>
 
         {overviewOpen && (
-          <div className="overlay" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setOverviewOpen(false)}>
-            <section className="overlay__panel overlay__panel--wide" role="dialog" aria-modal="true" aria-labelledby="overview-title">
-              <header className="overlay__header">
-                <div>
-                  <span className="eyebrow">DECK OVERVIEW</span>
-                  <h2 id="overview-title">Choose a slide</h2>
-                </div>
-                <button className="icon-button" type="button" onClick={() => setOverviewOpen(false)} aria-label="Close overview" autoFocus>
-                  <X aria-hidden="true" />
-                </button>
-              </header>
-              <div className="overview-grid">
-                {slides.map((slide, index) => (
-                  <button
-                    type="button"
-                    className={`overview-card${index === currentIndex ? " overview-card--active" : ""}`}
-                    key={slide.id}
-                    onClick={() => {
-                      goTo(index);
-                      setOverviewOpen(false);
-                    }}
-                  >
-                    <span className="overview-card__number">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="overview-card__section">{slide.section}</span>
-                    <strong>{slide.title}</strong>
-                  </button>
-                ))}
-              </div>
-            </section>
-          </div>
+          <nav
+            className="section-navigation"
+            id="section-navigation"
+            aria-labelledby="section-navigation-title"
+            ref={sectionNavigationRef}
+          >
+            <header className="section-navigation__header">
+              <h2 id="section-navigation-title">Sections</h2>
+            </header>
+            <ul className="section-navigation__list">
+              {slides.map((slide, index) => {
+                const isActive = index === currentIndex;
+                return (
+                  <li key={slide.id}>
+                    <button
+                      type="button"
+                      className={`section-navigation__item${isActive ? " section-navigation__item--active" : ""}`}
+                      aria-current={isActive ? "page" : undefined}
+                      ref={isActive ? activeSectionRef : undefined}
+                      onClick={() => {
+                        goTo(index);
+                        closeSectionNavigation(true);
+                      }}
+                    >
+                      {getSectionNavigationLabel(slide)}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
         )}
 
         {helpOpen && (

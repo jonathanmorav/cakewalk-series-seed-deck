@@ -1,13 +1,15 @@
-import { ChevronLeft, ChevronRight, CircleHelp, Maximize2, Minimize2, PanelsTopLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize2, Menu, Minimize2 } from "lucide-react";
+import type { Ref } from "react";
 
 interface DeckControlsProps {
   currentIndex: number;
   total: number;
   isFullscreen: boolean;
+  overviewOpen: boolean;
+  overviewButtonRef: Ref<HTMLButtonElement>;
   onPrevious: () => void;
   onNext: () => void;
   onOverview: () => void;
-  onHelp: () => void;
   onFullscreen: () => void;
 }
 
@@ -15,10 +17,11 @@ export function DeckControls({
   currentIndex,
   total,
   isFullscreen,
+  overviewOpen,
+  overviewButtonRef,
   onPrevious,
   onNext,
   onOverview,
-  onHelp,
   onFullscreen,
 }: DeckControlsProps) {
   return (
@@ -36,12 +39,15 @@ export function DeckControls({
 
       <button
         type="button"
-        className="control-button control-button--wide"
+        className={`control-button control-button--wide control-button--overview${overviewOpen ? " control-button--active" : ""}`}
+        ref={overviewButtonRef}
         onClick={onOverview}
-        aria-label="Open slide overview"
-        title="Slide overview (O)"
+        aria-label={overviewOpen ? "Close section navigation" : "Open section navigation"}
+        aria-controls="section-navigation"
+        aria-expanded={overviewOpen}
+        title="Sections (O)"
       >
-        <PanelsTopLeft aria-hidden="true" />
+        <Menu aria-hidden="true" />
         <span>
           {currentIndex + 1} / {total}
         </span>
@@ -70,15 +76,6 @@ export function DeckControls({
         {isFullscreen ? <Minimize2 aria-hidden="true" /> : <Maximize2 aria-hidden="true" />}
       </button>
 
-      <button
-        type="button"
-        className="control-button"
-        onClick={onHelp}
-        aria-label="Show keyboard shortcuts"
-        title="Keyboard shortcuts (?)"
-      >
-        <CircleHelp aria-hidden="true" />
-      </button>
     </nav>
   );
 }

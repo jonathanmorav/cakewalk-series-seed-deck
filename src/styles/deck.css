@@ -4535,8 +4535,8 @@ button.product-browser__tab {
 
 .deck-controls {
   position: fixed;
-  z-index: 40;
-  bottom: 20px;
+  z-index: 70;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   display: flex;
   padding: 7px;
@@ -4553,8 +4553,8 @@ button.product-browser__tab {
 .control-button,
 .icon-button {
   display: inline-grid;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   place-items: center;
   border: 0;
@@ -4598,6 +4598,12 @@ button.product-browser__tab {
   font-family: var(--cw-v2-font-mono);
   font-size: 11px;
   font-weight: 600;
+}
+
+.control-button--overview.control-button--active {
+  color: var(--cw-v2-color-reliant-red);
+  background: var(--cw-v2-color-coral-50);
+  box-shadow: inset 0 0 0 2px var(--cw-v2-color-coral-300);
 }
 
 .control-divider {
@@ -4674,10 +4680,6 @@ button.product-browser__tab {
   box-shadow: var(--cw-v2-shadow-lg);
 }
 
-.overlay__panel--wide {
-  width: min(100%, 980px);
-}
-
 .overlay__header {
   display: flex;
   margin-bottom: 28px;
@@ -4697,64 +4699,87 @@ button.product-browser__tab {
   letter-spacing: -0.025em;
 }
 
-.overview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.overview-card {
-  position: relative;
+.section-navigation {
+  position: fixed;
+  z-index: 60;
+  bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
   display: flex;
-  min-height: 138px;
-  padding: 20px;
+  width: min(430px, calc(100vw - 36px));
+  max-height: min(760px, calc(100dvh - 118px - env(safe-area-inset-bottom, 0px)));
   overflow: hidden;
-  align-items: flex-start;
   flex-direction: column;
-  text-align: left;
-  border: 1px solid var(--cw-v2-color-border);
-  border-radius: var(--cw-v2-radius-lg);
+  border: 1px solid rgb(213 213 202 / 0.82);
+  border-radius: 28px;
+  background: rgb(255 255 255 / 0.98);
+  box-shadow: 0 24px 70px rgb(26 26 46 / 0.2);
+  transform-origin: bottom left;
+  animation: section-navigation-arrive 220ms var(--cw-v2-motion-ease-out-quart) both;
+  backdrop-filter: blur(12px);
+}
+
+.section-navigation__header {
+  padding: 24px 28px 13px;
+  flex: 0 0 auto;
+}
+
+.section-navigation__header h2 {
+  margin: 0;
   color: var(--cw-v2-color-ink);
-  background: white;
-  box-shadow: var(--cw-v2-shadow-card);
+  font-size: clamp(24px, 2.15vw, 31px);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.section-navigation__list {
+  display: grid;
+  min-height: 0;
+  margin: 0;
+  padding: 0 14px 18px;
+  overflow-y: auto;
+  gap: 3px;
+  list-style: none;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--cw-v2-color-border) transparent;
+  scrollbar-width: thin;
+}
+
+.section-navigation__item {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 17px;
+  text-align: left;
+  border: 0;
+  border-radius: 15px;
+  color: var(--cw-v2-color-ink);
+  background: transparent;
+  font-family: var(--cw-v2-font-sans);
+  font-size: clamp(16px, 1.35vw, 19px);
+  font-weight: 560;
+  line-height: 1.25;
   cursor: pointer;
-  transition: border-color var(--cw-v2-motion-duration-fast) var(--cw-v2-motion-ease-out-quart), box-shadow var(--cw-v2-motion-duration-fast) var(--cw-v2-motion-ease-out-quart);
+  transition: color var(--cw-v2-motion-duration-fast) var(--cw-v2-motion-ease-out-quart), background var(--cw-v2-motion-duration-fast) var(--cw-v2-motion-ease-out-quart), transform 100ms ease;
 }
 
-.overview-card:hover {
-  border-color: var(--cw-v2-interactive-border-hover);
-  box-shadow: var(--cw-v2-shadow-card-hover);
+.section-navigation__item:hover {
+  color: var(--cw-v2-color-coral-800);
+  background: var(--cw-v2-color-coral-50);
 }
 
-.overview-card--active {
-  border-color: var(--cw-v2-color-reliant-red);
-  box-shadow: var(--cw-v2-interactive-ring-selected), var(--cw-v2-shadow-card);
+.section-navigation__item:active {
+  transform: translateY(1px);
 }
 
-.overview-card__number,
-.overview-card__section {
-  font-family: var(--cw-v2-font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.section-navigation__item--active,
+.section-navigation__item--active:hover {
+  color: white;
+  background: var(--cw-v2-color-reliant-red);
 }
 
-.overview-card__number {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  color: var(--cw-v2-color-text-light);
-}
-
-.overview-card__section {
-  margin-bottom: auto;
-  color: var(--cw-v2-color-reliant-red);
-}
-
-.overview-card strong {
-  max-width: 18ch;
-  font-size: 15px;
-  line-height: 1.3;
+@keyframes section-navigation-arrive {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .shortcut-list {
@@ -5157,6 +5182,11 @@ button.product-browser__tab {
 
   .metric-card {
     min-height: 15cqw;
+  }
+
+  .section-navigation {
+    right: 18px;
+    left: auto;
   }
 }
 
@@ -6609,14 +6639,14 @@ button.product-browser__tab {
 
   .deck-controls {
     right: 10px;
-    bottom: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     left: 10px;
     justify-content: center;
     transform: none;
   }
 
   .control-button--wide {
-    min-width: 42px;
+    min-width: 44px;
     padding: 0;
   }
 
@@ -6624,12 +6654,32 @@ button.product-browser__tab {
     display: none;
   }
 
-  .overview-grid {
-    grid-template-columns: 1fr;
+  .section-navigation {
+    right: 10px;
+    bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    width: auto;
+    max-height: calc(100dvh - 108px - env(safe-area-inset-bottom, 0px));
+    border-radius: 22px;
+    transform-origin: bottom center;
   }
 
-  .overview-card {
-    min-height: 116px;
+  .section-navigation__header {
+    padding: 20px 20px 11px;
+  }
+
+  .section-navigation__header h2 {
+    font-size: 24px;
+  }
+
+  .section-navigation__list {
+    padding: 0 10px 13px;
+  }
+
+  .section-navigation__item {
+    min-height: 45px;
+    padding: 9px 14px;
+    font-size: 16px;
   }
 
   .shortcut-list div {
@@ -6672,6 +6722,10 @@ button.product-browser__tab {
   .tam-sources__drawer {
     animation: none !important;
   }
+
+  .section-navigation {
+    animation: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) and (max-width: 700px) and (orientation: portrait) {
@@ -6701,7 +6755,7 @@ button.product-browser__tab {
 }
 
 :fullscreen .deck-controls {
-  bottom: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
 }
 
 @media print {
