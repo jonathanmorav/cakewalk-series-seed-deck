@@ -752,7 +752,12 @@ export const teamMembers: readonly PersonProfile[] = [
   {
     name: "Lucas Milliron",
     title: "Chief Technology Officer",
-    highlights: ["", "", ""],
+    image: "people/team-lucas.png",
+    highlights: [
+      "VP, Technology @ Salty (Acquired by CDK)",
+      "Founder, Benezen",
+      "Engineering Manager, National Benefits Partners",
+    ],
   },
 ];
 

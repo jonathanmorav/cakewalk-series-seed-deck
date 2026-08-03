@@ -163,11 +163,16 @@ describe("slides eleven through fourteen content", () => {
 });
 
 describe("team and board profiles", () => {
-  it("keeps Lucas Milliron's leadership card ready for future highlights", () => {
+  it("preserves Lucas Milliron's leadership experience", () => {
     expect(teamMembers[2]).toEqual({
       name: "Lucas Milliron",
       title: "Chief Technology Officer",
-      highlights: ["", "", ""],
+      image: "people/team-lucas.png",
+      highlights: [
+        "VP, Technology @ Salty (Acquired by CDK)",
+        "Founder, Benezen",
+        "Engineering Manager, National Benefits Partners",
+      ],
     });
     expect(teamMembers.map(({ name }) => name)).not.toContain("Niv Ben-Dor");
   });
