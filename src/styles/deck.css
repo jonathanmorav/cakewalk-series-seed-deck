@@ -3481,6 +3481,14 @@ button.product-browser__tab {
   gap: 8px;
 }
 
+.tam-slide--print .tam-slide__headline,
+.tam-slide--print .tam-market,
+.tam-slide--print .tam-market__circle,
+.tam-slide--print .tam-market__legend-item,
+.tam-slide--print .tam-sources__drawer {
+  animation: none !important;
+}
+
 .tam-slide--print .tam-slide__headline {
   font-size: 38px;
 }
