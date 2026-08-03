@@ -4,6 +4,7 @@ import {
   competitiveAdvantageRows,
   conclusionCopy,
   formatDeckMonth,
+  fragmentedBenefitsLifecycle,
   projectionRows,
   projectionYears,
   productDemos,
@@ -27,10 +28,29 @@ describe("formatDeckMonth", () => {
 });
 
 describe("slide registry", () => {
+  it("turns slide four into an owner-centered fragmented benefits lifecycle", () => {
+    expect(slides[3]).toMatchObject({
+      id: "flow",
+      title: "Offering benefits is a second job for small-business owners",
+      section: "The need",
+    });
+    expect(fragmentedBenefitsLifecycle.map(({ label }) => label)).toEqual([
+      "Broker coordination",
+      "Plan comparison",
+      "Employee census",
+      "Carrier applications",
+      "Underwriting",
+      "Employee enrollment",
+      "Billing + payroll",
+      "Changes + renewals",
+    ]);
+    expect(slides[3].title).not.toMatch(/40\+|8\s*(?:-|–)\s*12/);
+  });
+
   it("keeps the interactive Cakewalk product tour on slide five", () => {
     expect(slides[4]).toMatchObject({
       id: "cakewalk",
-      title: "Cakewalk Enterprise Quality Benefits, Made Effortless",
+      title: "Fortune 500-caliber benefits, made effortless",
       section: "The product",
     });
     expect(slides[4].renderPrint).toBeTypeOf("function");
@@ -88,6 +108,8 @@ describe("slide registry", () => {
       { id: "the-ask", section: "The Raise" },
       { id: "conclusion", section: "Conclusion" },
     ]);
+    expect(slides[12]).toMatchObject({ tone: "canvas" });
+    expect(slides[13]).toMatchObject({ tone: "canvas" });
   });
 });
 

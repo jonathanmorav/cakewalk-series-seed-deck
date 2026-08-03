@@ -1,11 +1,20 @@
 /* eslint-disable react-refresh/only-export-components -- this is the intentional single-file deck authoring surface */
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type CSSProperties } from "react";
 import {
   BookOpenText,
+  BriefcaseBusiness,
   Check,
+  ClipboardCheck,
+  CreditCard,
   ExternalLink,
+  FileText,
   LockKeyhole,
   RefreshCw,
+  ShieldCheck,
+  Store,
+  Table2,
+  UserRound,
+  UserRoundCheck,
 } from "lucide-react";
 import { BusinessOnboardingAutoplay } from "../components/BusinessOnboardingAutoplay";
 import type { DeckSlide } from "./types";
@@ -70,7 +79,7 @@ function MissionSlide() {
     <div className="ceremony-layout">
       <h1 className="ceremony-title">
         <span className="ceremony-line">Our mission is to make</span>{" "}
-        <span className="ceremony-line">high quality employee benefits</span>{" "}
+        <span className="ceremony-line">big-company employee benefits</span>{" "}
         <span className="ceremony-line ceremony-title__emphasis">accessible and easy to offer</span>{" "}
         <span className="ceremony-line">for every small business.</span>
       </h1>
@@ -82,71 +91,179 @@ function SolutionSlide() {
   return (
     <div className="ceremony-layout">
       <h1 className="ceremony-title ceremony-title--solution">
-        <span className="ceremony-line">Cakewalk enables all small business owners</span>{" "}
-        <span className="ceremony-line">
-          to offer <span className="ceremony-title__emphasis">enterprise grade employee benefits</span>
+        <span className="ceremony-line">Cakewalk unlocks</span>{" "}
+        <span className="ceremony-line ceremony-title__emphasis">
+          Fortune 500-caliber employee benefits
         </span>{" "}
-        <span className="ceremony-line">without friction.</span>
+        <span className="ceremony-line">for small businesses.</span>
       </h1>
     </div>
   );
 }
 
-const customerJourneyStages = [
+export const fragmentedBenefitsLifecycle = [
   {
-    title: "Initial Interest",
-    duration: "1-2 weeks",
-    quotes: ["I don’t have time for this", "Where do I even start?", "I’m not an HR expert"],
+    id: "broker-coordination",
+    step: "01",
+    label: "Broker coordination",
+    detail: "Calls + referrals",
+    icon: BriefcaseBusiness,
+    tone: "blue",
+    attentionDelay: "0s",
+    staticX: "-35cqw",
+    staticY: "-29cqh",
   },
   {
-    title: "Initial Contact",
-    duration: "1-2 weeks",
-    quotes: ["Who can I even trust?", "Everyone’s trying to sell me something", "I’m juggling too many disconnected systems"],
+    id: "plan-comparison",
+    step: "02",
+    label: "Plan comparison",
+    detail: "Carrier PDFs",
+    icon: ShieldCheck,
+    tone: "mint",
+    attentionDelay: "1.75s",
+    staticX: "0cqw",
+    staticY: "-34cqh",
   },
   {
-    title: "Product Education",
-    duration: "2-3 weeks",
-    quotes: ["This is way too complicated", "I don’t understand what I’m buying", "The options available are terrible"],
+    id: "employee-census",
+    step: "03",
+    label: "Employee census",
+    detail: "Spreadsheet",
+    icon: Table2,
+    tone: "sunny",
+    attentionDelay: "3.5s",
+    staticX: "35cqw",
+    staticY: "-29cqh",
   },
   {
-    title: "Underwriting",
-    duration: "3-4 weeks",
-    quotes: ["Why is this taking so long?", "What’s a census?", "Why am I still filling out paper forms?"],
+    id: "carrier-applications",
+    step: "04",
+    label: "Carrier applications",
+    detail: "Forms + signatures",
+    icon: FileText,
+    tone: "purple",
+    attentionDelay: "5.25s",
+    staticX: "35cqw",
+    staticY: "0cqh",
   },
   {
-    title: "Decisioning / Billing",
-    duration: "1-2 weeks",
-    quotes: ["This costs way more than I expected", "I’m paying more for less coverage", "Is this really worth it for my team?"],
+    id: "underwriting",
+    step: "05",
+    label: "Underwriting",
+    detail: "More follow-up",
+    icon: ClipboardCheck,
+    tone: "blue",
+    attentionDelay: "7s",
+    staticX: "35cqw",
+    staticY: "29cqh",
   },
-];
+  {
+    id: "employee-enrollment",
+    step: "06",
+    label: "Employee enrollment",
+    detail: "Emails + decisions",
+    icon: UserRoundCheck,
+    tone: "mint",
+    attentionDelay: "8.75s",
+    staticX: "0cqw",
+    staticY: "34cqh",
+  },
+  {
+    id: "billing-payroll",
+    step: "07",
+    label: "Billing + payroll",
+    detail: "Separate systems",
+    icon: CreditCard,
+    tone: "sunny",
+    attentionDelay: "10.5s",
+    staticX: "-35cqw",
+    staticY: "29cqh",
+  },
+  {
+    id: "changes-renewals",
+    step: "08",
+    label: "Changes + renewals",
+    detail: "Start all over",
+    icon: RefreshCw,
+    tone: "purple",
+    attentionDelay: "12.25s",
+    staticX: "-35cqw",
+    staticY: "0cqh",
+  },
+] as const;
 
 function BurdenSlide() {
   return (
-    <div className="customer-journey">
-      <h1 className="customer-journey__title">
-        SMBs face <em>40+ steps</em> and <em>8-12 weeks</em> to get benefits.
-      </h1>
+    <div className="fragmented-benefits">
+      <header className="fragmented-benefits__header">
+        <h1 className="fragmented-benefits__title">
+          Offering benefits is a <em>second job</em> for small-business owners.
+        </h1>
+      </header>
 
-      <ol className="customer-journey__process" aria-label="The current small-business benefits journey">
-        {customerJourneyStages.map((stage, stageIndex) => (
-          <li className="customer-journey__stage" key={stage.title}>
-            <header className="customer-journey__stage-header">
-              <strong>{stage.title}</strong>
-              <span>{stage.duration}</span>
-            </header>
+      <figure
+        className="benefits-chaos"
+        aria-label="The fragmented small-business benefits lifecycle: broker coordination, plan comparison, employee census, carrier applications, underwriting, employee enrollment, billing and payroll, and ongoing changes and renewals"
+      >
+        <svg className="benefits-chaos__connectors" viewBox="0 0 1000 360" preserveAspectRatio="none" aria-hidden="true">
+          <ellipse className="benefits-chaos__orbit benefits-chaos__orbit--outer" cx="500" cy="180" rx="408" ry="145" />
+          <ellipse className="benefits-chaos__orbit benefits-chaos__orbit--inner" cx="500" cy="180" rx="276" ry="105" />
+          <path className="benefits-chaos__line benefits-chaos__line--blue" d="M500 180 C410 75 220 55 108 92" />
+          <path className="benefits-chaos__line benefits-chaos__line--coral" d="M500 180 C620 75 790 55 902 92" />
+          <path className="benefits-chaos__line benefits-chaos__line--mint" d="M500 180 C620 285 795 300 905 272" />
+          <path className="benefits-chaos__line benefits-chaos__line--purple" d="M500 180 C385 288 215 302 95 270" />
+          <path className="benefits-chaos__line benefits-chaos__line--return" d="M180 80 C700 322 265 322 820 78" />
+          <path className="benefits-chaos__line benefits-chaos__line--return" d="M162 278 C740 35 282 34 845 280" />
+        </svg>
 
-            <ol className="customer-journey__quotes">
-              {stage.quotes.map((quote, quoteIndex) => (
-                <li key={quote} style={{ animationDelay: `${160 + (stageIndex * stage.quotes.length + quoteIndex) * 65}ms` }}>
-                  <blockquote>
-                    <p>“{quote}”</p>
-                  </blockquote>
-                </li>
-              ))}
-            </ol>
-          </li>
-        ))}
-      </ol>
+        <div className="benefits-chaos__pressure" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="benefits-chaos__actors">
+          {fragmentedBenefitsLifecycle.map((stage) => {
+            const StageIcon = stage.icon;
+            return (
+              <article
+                className={`benefits-chaos__actor benefits-chaos__actor--${stage.tone}`}
+                data-step={stage.step}
+                key={stage.id}
+                style={{
+                  "--attention-delay": stage.attentionDelay,
+                  "--static-x": stage.staticX,
+                  "--static-y": stage.staticY,
+                } as CSSProperties}
+              >
+                <span className="benefits-chaos__actor-icon" aria-hidden="true">
+                  <StageIcon />
+                </span>
+                <span className="benefits-chaos__actor-copy">
+                  <strong>{stage.label}</strong>
+                  <small>{stage.detail}</small>
+                </span>
+                <span className="benefits-chaos__actor-step" aria-hidden="true">{stage.step}</span>
+              </article>
+            );
+          })}
+        </div>
+
+        <article className="benefits-chaos__owner">
+          <span className="benefits-chaos__owner-avatar" aria-hidden="true">
+            <UserRound />
+            <span className="benefits-chaos__owner-business">
+              <Store />
+            </span>
+          </span>
+          <span className="benefits-chaos__owner-copy">
+            <span>No HR or benefits team</span>
+            <strong>Small-business owner</strong>
+            <small>Running the business—and managing every handoff.</small>
+          </span>
+        </article>
+
+      </figure>
     </div>
   );
 }
@@ -187,13 +304,8 @@ function initialProductDemoId() {
 function ProductBrowserHeadline() {
   return (
     <h1 className="product-browser-slide__title">
-      <img
-        className="product-browser-slide__title-logo"
-        src={`${import.meta.env.BASE_URL}brand/cakewalk-logo.svg`}
-        alt="Cakewalk"
-      />
       <span>
-        Enterprise Quality Benefits, <em>Made Effortless.</em>
+        Fortune 500-caliber benefits, <em>made effortless.</em>
       </span>
     </h1>
   );
@@ -852,7 +964,7 @@ export const tractionStats = [
 function TractionSlide() {
   return (
     <div className="traction-slide">
-      <h1>Momentum Built with <em>Speed</em></h1>
+      <h1>Built with <em>Small Business Customers.</em></h1>
       <div className="traction-stats">
         {tractionStats.map((stat, index) => (
           <article key={stat.label} style={{ animationDelay: `${260 + index * 100}ms` }}>
@@ -939,21 +1051,21 @@ export const slides: DeckSlide[] = [
     section: "The solution",
     tone: "ink",
     brandPlacement: "footer",
-    notes: "Introduce Cakewalk as the low-friction path to enterprise-grade benefits.",
+    notes: "Lead with the core access unlock: Fortune 500-caliber employee benefits for small businesses.",
     render: () => <SolutionSlide />,
   },
   {
     id: "flow",
-    title: "SMBs face 40+ steps and 8-12 weeks to get benefits",
+    title: "Offering benefits is a second job for small-business owners",
     section: "The need",
     tone: "sidewalk",
     brandPlacement: "footer",
-    notes: "The problem isn’t that small-business owners don’t care about benefits. The problem is that the process was never designed around them. You’re expected to compare unfamiliar products, coordinate paperwork, enroll employees, handle billing, and manage changes—all while running the business. Cakewalk takes that work off your plate.",
+    notes: "Walk the lifecycle clockwise. Emphasize that every stage adds another disconnected call, form, system, or handoff while the owner is still running the business.",
     render: () => <BurdenSlide />,
   },
   {
     id: "cakewalk",
-    title: "Cakewalk Enterprise Quality Benefits, Made Effortless",
+    title: "Fortune 500-caliber benefits, made effortless",
     section: "The product",
     tone: "canvas",
     brandPlacement: "footer",
@@ -1018,7 +1130,7 @@ export const slides: DeckSlide[] = [
   },
   {
     id: "traction",
-    title: "Momentum Built with Speed",
+    title: "Built with Small Business Customers.",
     section: "Traction",
     tone: "canvas",
     brandPlacement: "footer",
@@ -1029,7 +1141,7 @@ export const slides: DeckSlide[] = [
     id: "the-ask",
     title: "$5M New Equity Commitment",
     section: "The Raise",
-    tone: "ink",
+    tone: "canvas",
     brandPlacement: "footer",
     notes: "Present the $5M Series Seed raise at a $25M pre-money valuation and place it in the context of the prior SAFE round.",
     render: () => <TheAskSlide />,
@@ -1038,7 +1150,7 @@ export const slides: DeckSlide[] = [
     id: "conclusion",
     title: "Every employee deserves great benefits",
     section: "Conclusion",
-    tone: "ink",
+    tone: "canvas",
     brandPlacement: "footer",
     notes: "Close on Cakewalk's promise: every employee deserves great benefits, and Cakewalk makes them easier to offer.",
     render: () => <ConclusionSlide />,

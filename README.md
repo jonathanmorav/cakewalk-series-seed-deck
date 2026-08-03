@@ -34,6 +34,10 @@ The story lives in one place: `src/deck/slides.tsx`.
 
 Reusable presentation framing and navigation live under `src/components/`. Cakewalk source tokens are copied under `src/design-system/`; deck-specific layout is in `src/styles/deck.css`.
 
+## Narrative refinement
+
+The feedback-driven workflow, stage status, exit criteria, and locked-decision log live in [`DECK_REFINEMENT_PLAN.md`](./DECK_REFINEMENT_PLAN.md). Update that reference as slide and voiceover decisions are approved.
+
 ## Presentation controls
 
 | Action | Control |
