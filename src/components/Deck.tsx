@@ -163,7 +163,15 @@ export function Deck({ slides }: DeckProps) {
         />
 
         <div className="deck-progress" aria-hidden="true">
-          <div className="deck-progress__fill" style={{ width: `${progress}%` }} />
+          <div className="deck-progress__band deck-progress__band--mint">
+            <div className="deck-progress__fill" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="deck-progress__band deck-progress__band--blue">
+            <div className="deck-progress__fill" style={{ width: `${progress}%` }} />
+          </div>
+          <div className="deck-progress__band deck-progress__band--purple">
+            <div className="deck-progress__fill" style={{ width: `${progress}%` }} />
+          </div>
         </div>
 
         {overviewOpen && (

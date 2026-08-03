@@ -689,7 +689,15 @@ function CompetitiveAdvantageSlide() {
   return (
     <div className="competitive-slide">
       <header className="competitive-slide__header">
-        <h1>Why Cakewalk Wins</h1>
+        <h1 className="competitive-slide__title" aria-label="Why Cakewalk Wins">
+          <span aria-hidden="true">Why</span>
+          <img
+            src={`${import.meta.env.BASE_URL}brand/cakewalk-logo.svg`}
+            alt=""
+            aria-hidden="true"
+          />
+          <span aria-hidden="true">Wins</span>
+        </h1>
         <p>End-to-end technology and risk pooling, purpose-built for the SMB.</p>
       </header>
 
@@ -697,7 +705,12 @@ function CompetitiveAdvantageSlide() {
         <div className="competitive-table__header" role="row">
           <span role="columnheader" aria-label="Comparison category" />
           <span role="columnheader">Incumbent</span>
-          <span role="columnheader">Cakewalk</span>
+          <span className="competitive-table__cakewalk-header" role="columnheader">
+            <img
+              src={`${import.meta.env.BASE_URL}brand/cakewalk-logo-orange.svg`}
+              alt="Cakewalk"
+            />
+          </span>
         </div>
 
         <div className="competitive-table__body" role="rowgroup">
