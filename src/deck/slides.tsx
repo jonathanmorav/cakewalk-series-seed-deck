@@ -564,10 +564,8 @@ function TamSlide({ forceSources = false }: { forceSources?: boolean }) {
   return (
     <div className={`tam-slide${forceSources ? " tam-slide--print" : ""}`}>
       <h1 className="tam-slide__headline">
-        <span>
-          The largest <em>overlooked</em>
-        </span>
-        <span>insurance market in the U.S.</span>
+        The largest <em>overlooked</em>{" "}
+        insurance market in the U.S.
       </h1>
 
       <section className="tam-market" aria-label="Total addressable market visualization">
@@ -668,7 +666,7 @@ export const competitiveAdvantageRows = [
   {
     category: "Process Steps",
     incumbent: "40+ manual handoffs",
-    cakewalk: "3 simple steps",
+    cakewalk: "One connected workflow",
   },
   {
     category: "Underwriting",
@@ -683,7 +681,7 @@ export const competitiveAdvantageRows = [
   {
     category: "Technology",
     incumbent: "Fragmented & legacy systems",
-    cakewalk: "End-to-end digital",
+    cakewalk: "AI-Native",
   },
 ] as const;
 

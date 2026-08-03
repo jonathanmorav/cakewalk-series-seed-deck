@@ -192,7 +192,7 @@ describe("competitive advantage comparison", () => {
       {
         category: "Process Steps",
         incumbent: "40+ manual handoffs",
-        cakewalk: "3 simple steps",
+        cakewalk: "One connected workflow",
       },
       {
         category: "Underwriting",
@@ -207,7 +207,7 @@ describe("competitive advantage comparison", () => {
       {
         category: "Technology",
         incumbent: "Fragmented & legacy systems",
-        cakewalk: "End-to-end digital",
+        cakewalk: "AI-Native",
       },
     ]);
     expect(competitiveAdvantageRows.map(({ category }) => category)).not.toContain("Premium Cost");
