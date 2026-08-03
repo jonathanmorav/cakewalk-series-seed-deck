@@ -89,6 +89,7 @@ a:focus-visible {
   background: var(--cw-v2-color-sidewalk);
 }
 
+.slide[data-slide-id="cover"],
 .slide[data-slide-id="flow"],
 .slide[data-slide-id="cakewalk"],
 .slide[data-slide-id="tam"],
@@ -4167,7 +4168,7 @@ button.product-browser__tab {
 }
 
 .raise-slide h1 em {
-  color: var(--cw-v2-color-reliant-red-hover);
+  color: var(--cw-v2-color-reliant-red);
   font-style: normal;
 }
 
