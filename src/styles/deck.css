@@ -3108,6 +3108,14 @@ button.product-browser__tab {
   padding: clamp(66px, 7.4cqh, 104px) clamp(48px, 6cqw, 96px) clamp(62px, 6.9cqh, 92px);
 }
 
+.slide[data-slide-id="tam"] .slide__ambient {
+  display: none;
+}
+
+.slide[data-slide-id="tam"] .slide__section {
+  color: var(--cw-v2-color-reliant-red);
+}
+
 .tam-slide {
   position: relative;
   display: grid;
@@ -3119,17 +3127,29 @@ button.product-browser__tab {
 }
 
 .tam-slide__headline {
+  display: grid;
+  width: min(100%, 1120px);
   margin: 0 auto;
-  max-width: 29ch;
+  gap: 0;
   color: var(--cw-v2-color-ink);
   font-family: var(--cw-v2-font-sans);
-  font-size: clamp(30px, 3cqw, 48px);
+  font-size: clamp(40px, 4.15cqw, 58px);
   font-weight: 750;
   letter-spacing: -0.045em;
-  line-height: 1.03;
-  text-align: center;
+  line-height: 1.02;
+  text-align: left;
   text-wrap: balance;
   animation: tam-content-arrive 600ms var(--cw-v2-motion-ease-out-quart) 100ms both;
+}
+
+.tam-slide__headline span {
+  display: block;
+}
+
+.tam-slide__headline em {
+  color: var(--cw-v2-color-reliant-red);
+  font-style: italic;
+  font-weight: 700;
 }
 
 .tam-market {
@@ -3138,8 +3158,8 @@ button.product-browser__tab {
   min-height: 0;
   margin: 0 auto;
   align-items: center;
-  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-  gap: clamp(28px, 4cqw, 64px);
+  grid-template-columns: minmax(0, 1.06fr) minmax(300px, 0.94fr);
+  gap: clamp(36px, 4.8cqw, 72px);
   animation: tam-content-arrive 600ms var(--cw-v2-motion-ease-out-quart) 350ms both;
 }
 
@@ -3159,13 +3179,16 @@ button.product-browser__tab {
 
 .tam-market__circle--total {
   position: relative;
-  width: clamp(250px, 29cqw, 455px);
-  border: 1px solid rgb(53 144 243 / 0.16);
-  color: var(--cw-v2-color-blue-600);
-  background:
-    radial-gradient(circle at 38% 28%, rgb(255 255 255 / 0.62), transparent 29%),
-    linear-gradient(145deg, rgb(53 144 243 / 0.17), rgb(53 144 243 / 0.07));
-  box-shadow: 0 18px 50px rgb(37 101 170 / 0.09);
+  display: flex;
+  width: clamp(290px, 30cqw, 430px);
+  padding-top: clamp(24px, 2.35cqw, 36px);
+  align-items: center;
+  flex-direction: column;
+  gap: clamp(5px, 0.55cqw, 8px);
+  border: 1px solid var(--cw-v2-color-blue-300);
+  color: var(--cw-v2-color-blue-700);
+  background: var(--cw-v2-color-blue-50);
+  box-shadow: none;
   animation: tam-circle-total-arrive 450ms var(--cw-v2-motion-ease-out-quart) 450ms both;
 }
 
@@ -3173,40 +3196,75 @@ button.product-browser__tab {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 66.667%;
-  border: 1px solid rgb(73 116 114 / 0.15);
+  display: flex;
+  width: 62.33%;
+  padding: clamp(16px, 1.7cqw, 26px);
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(7px, 0.72cqw, 11px);
+  border: 1px solid var(--cw-v2-color-coral-500);
   color: var(--cw-v2-color-ink);
-  background:
-    radial-gradient(circle at 35% 24%, rgb(255 255 255 / 0.34), transparent 28%),
-    linear-gradient(145deg, var(--cw-v2-color-mint-300), var(--cw-v2-color-mint));
-  box-shadow: 0 18px 34px rgb(44 69 69 / 0.18), 0 0 0 5px rgb(146 231 229 / 0.22);
+  background: var(--cw-v2-color-coral-50);
+  box-shadow: none;
   transform: translateX(-50%);
-  animation: tam-circle-addressable-arrive 600ms var(--cw-v2-motion-ease-out-quart) 650ms both;
+  animation: tam-circle-addressable-arrive 700ms var(--cw-v2-motion-ease-out-quart) 650ms both;
+}
+
+.tam-market__circle-label {
+  color: var(--cw-v2-color-blue-700);
+  font-family: var(--cw-v2-font-mono);
+  font-size: clamp(9px, 0.72cqw, 11px);
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tam-market__circle--addressable .tam-market__circle-label {
+  color: var(--cw-v2-color-coral-700);
 }
 
 .tam-market__value {
-  position: absolute;
-  top: clamp(12px, 1.35cqw, 22px);
-  left: 50%;
-  font-size: clamp(22px, 2.1cqw, 34px);
-  font-weight: 800;
+  position: static;
+  color: var(--cw-v2-color-blue-700);
+  font-size: clamp(28px, 2.75cqw, 42px);
+  font-weight: 750;
   letter-spacing: -0.035em;
   line-height: 1;
   white-space: nowrap;
-  transform: translateX(-50%);
 }
 
 .tam-market__circle--addressable .tam-market__value {
-  top: clamp(11px, 1.1cqw, 18px);
-  font-size: clamp(20px, 1.85cqw, 30px);
+  color: var(--cw-v2-color-ink);
+  font-size: clamp(42px, 4.1cqw, 64px);
+  font-weight: 800;
 }
 
 .tam-market__value sup {
   margin-left: 2px;
   font-family: var(--cw-v2-font-mono);
-  font-size: 0.32em;
+  font-size: 0.28em;
   font-weight: 650;
   letter-spacing: 0;
+  vertical-align: super;
+}
+
+.tam-market__share {
+  max-width: 17ch;
+  color: var(--cw-v2-color-coral-800);
+  font-size: clamp(10px, 0.88cqw, 13px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.tam-market__share sup {
+  margin-left: 2px;
+  font-family: var(--cw-v2-font-mono);
+  font-size: 0.6em;
   vertical-align: super;
 }
 
@@ -3223,11 +3281,15 @@ button.product-browser__tab {
 
 .tam-market__legend {
   display: grid;
-  max-width: 460px;
-  gap: clamp(24px, 3.2cqh, 38px);
+  max-width: 440px;
+  border-left: 1px solid var(--cw-v2-color-border);
+  gap: 0;
 }
 
 .tam-market__legend-item {
+  position: relative;
+  padding: clamp(12px, 1.35cqh, 18px) 0 clamp(12px, 1.35cqh, 18px) clamp(20px, 2cqw, 30px);
+  border-bottom: 1px solid rgb(213 213 202 / 0.72);
   animation: tam-content-arrive 400ms var(--cw-v2-motion-ease-out-quart) both;
 }
 
@@ -3239,53 +3301,77 @@ button.product-browser__tab {
   animation-delay: 650ms;
 }
 
+.tam-market__legend-item:nth-child(3) {
+  border-bottom: 0;
+  animation-delay: 750ms;
+}
+
+.tam-market__legend-item::before {
+  display: block;
+  margin-bottom: clamp(4px, 0.45cqh, 7px);
+  color: var(--cw-v2-color-reliant-red);
+  content: "Market proof";
+  font-family: var(--cw-v2-font-mono);
+  font-size: clamp(8px, 0.65cqw, 10px);
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.tam-market__legend-item--total-market::before {
+  color: var(--cw-v2-color-blue-700);
+  content: "Total market";
+}
+
+.tam-market__legend-item--tam::before {
+  content: "Cakewalk TAM";
+}
+
+.tam-market__legend-item--workforce::before {
+  content: "Workforce share";
+}
+
 .tam-market__legend-label {
-  display: flex;
-  align-items: center;
-  gap: clamp(9px, 0.9cqw, 14px);
+  display: block;
 }
 
 .tam-market__legend-label > span {
-  width: clamp(10px, 0.9cqw, 14px);
-  aspect-ratio: 1;
-  flex: 0 0 auto;
-  border-radius: var(--cw-v2-radius-full);
+  display: none;
 }
 
 .tam-market__legend-label h2 {
   margin: 0;
-  font-size: clamp(15px, 1.2cqw, 19px);
+  color: var(--cw-v2-color-ink);
+  font-size: clamp(15px, 1.25cqw, 19px);
   font-weight: 750;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
-.tam-market__legend-item--total-market .tam-market__legend-label > span {
-  border: 1px solid rgb(53 144 243 / 0.2);
-  background: var(--cw-v2-color-blue-100);
-  box-shadow: 0 0 0 4px rgb(53 144 243 / 0.07);
-}
-
 .tam-market__legend-item--total-market h2 {
-  color: var(--cw-v2-color-blue-600);
-}
-
-.tam-market__legend-item--tam .tam-market__legend-label > span {
-  border: 1px solid rgb(73 116 114 / 0.18);
-  background: var(--cw-v2-color-mint);
-  box-shadow: 0 0 0 4px rgb(146 231 229 / 0.2);
+  color: var(--cw-v2-color-blue-800);
 }
 
 .tam-market__legend-item--tam h2 {
-  color: var(--cw-v2-color-mint-800);
+  color: var(--cw-v2-color-coral-800);
 }
 
 .tam-market__legend-item p {
   max-width: 42ch;
-  margin: clamp(7px, 0.7cqh, 10px) 0 0 clamp(19px, 1.8cqw, 28px);
+  margin: clamp(5px, 0.55cqh, 8px) 0 0;
   color: var(--cw-v2-color-text-subtle);
-  font-size: clamp(12px, 1.05cqw, 16px);
-  line-height: 1.5;
+  font-size: clamp(12px, 1cqw, 15px);
+  line-height: 1.45;
+}
+
+.tam-market__workforce-value {
+  display: block;
+  color: var(--cw-v2-color-ink);
+  font-size: clamp(32px, 3.1cqw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
 }
 
 .tam-sources {
@@ -3297,15 +3383,15 @@ button.product-browser__tab {
 
 .tam-sources__toggle {
   display: inline-flex;
-  min-height: clamp(32px, 3cqh, 40px);
-  padding: clamp(7px, 0.7cqh, 10px) clamp(13px, 1.2cqw, 19px);
+  min-height: 44px;
+  padding: 9px clamp(14px, 1.2cqw, 18px);
   align-items: center;
   gap: 8px;
-  border: 1px solid rgb(53 144 243 / 0.18);
-  border-radius: var(--cw-v2-radius-full);
+  border: 1px solid var(--cw-v2-color-border);
+  border-radius: var(--cw-v2-radius-md);
   color: var(--cw-v2-color-text-subtle);
-  background: rgb(255 255 255 / 0.88);
-  box-shadow: var(--cw-v2-shadow-card);
+  background: white;
+  box-shadow: none;
   cursor: pointer;
   font-size: clamp(10px, 0.85cqw, 13px);
   font-weight: 650;
@@ -3313,9 +3399,9 @@ button.product-browser__tab {
 }
 
 .tam-sources__toggle:hover {
-  border-color: var(--cw-v2-color-blue-300);
-  color: var(--cw-v2-color-blue-700);
-  background: white;
+  border-color: var(--cw-v2-color-coral-500);
+  color: var(--cw-v2-color-ink);
+  background: var(--cw-v2-color-coral-50);
 }
 
 .tam-sources__toggle svg {
@@ -3330,8 +3416,8 @@ button.product-browser__tab {
   max-height: min(29cqh, 260px);
   padding: clamp(13px, 1.35cqw, 21px);
   overflow: auto;
-  border: 1px solid rgb(53 144 243 / 0.16);
-  border-radius: var(--cw-v2-radius-xl);
+  border: 1px solid var(--cw-v2-color-border);
+  border-radius: var(--cw-v2-radius-lg);
   color: var(--cw-v2-color-text-subtle);
   background: rgb(255 255 255 / 0.97);
   box-shadow: var(--cw-v2-shadow-lg);
@@ -3408,7 +3494,7 @@ button.product-browser__tab {
   width: 100%;
   max-height: none;
   padding: 10px 14px;
-  box-shadow: var(--cw-v2-shadow-card);
+  box-shadow: none;
 }
 
 .tam-slide--print .tam-sources__drawer ol {
@@ -3431,7 +3517,7 @@ button.product-browser__tab {
 }
 
 @keyframes tam-circle-addressable-arrive {
-  from { opacity: 0; transform: translateX(-50%) scale(1.03); }
+  from { opacity: 0; transform: translateX(-50%) scale(0.82); }
   to { opacity: 1; transform: translateX(-50%) scale(1); }
 }
 
@@ -6419,6 +6505,14 @@ button.product-browser__tab {
   .conclusion-slide h1,
   .conclusion-slide h2 > span,
   .conclusion-slide__logo {
+    animation: none !important;
+  }
+
+  .tam-slide__headline,
+  .tam-market,
+  .tam-market__circle,
+  .tam-market__legend-item,
+  .tam-sources__drawer {
     animation: none !important;
   }
 }

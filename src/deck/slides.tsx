@@ -564,18 +564,26 @@ function TamSlide({ forceSources = false }: { forceSources?: boolean }) {
   return (
     <div className={`tam-slide${forceSources ? " tam-slide--print" : ""}`}>
       <h1 className="tam-slide__headline">
-        The largest overlooked insurance market in the U.S.
+        <span>
+          The largest <em>overlooked</em>
+        </span>
+        <span>insurance market in the U.S.</span>
       </h1>
 
       <section className="tam-market" aria-label="Total addressable market visualization">
         <figure className="tam-market__figure">
           <div className="tam-market__circle tam-market__circle--total">
+            <span className="tam-market__circle-label">Total U.S. market</span>
             <span className="tam-market__value">
               {tamMarketSegments[0].value}<sup>{tamMarketSegments[0].sources}</sup>
             </span>
             <div className="tam-market__circle tam-market__circle--addressable">
+              <span className="tam-market__circle-label">Small-business TAM</span>
               <span className="tam-market__value">
                 {tamMarketSegments[1].value}<sup>{tamMarketSegments[1].sources}</sup>
+              </span>
+              <span className="tam-market__share">
+                39% of the U.S. workforce<sup>8</sup>
               </span>
             </div>
           </div>
@@ -591,9 +599,17 @@ function TamSlide({ forceSources = false }: { forceSources?: boolean }) {
                 <span aria-hidden="true" />
                 <h2>{segment.label}</h2>
               </div>
-              <p>{segment.detail}</p>
+              <p>
+                {segment.id === "tam"
+                  ? "Businesses with 50 or fewer employees."
+                  : segment.detail}
+              </p>
             </article>
           ))}
+          <article className="tam-market__legend-item tam-market__legend-item--workforce">
+            <span className="tam-market__workforce-value">38.85%</span>
+            <p>of the U.S. labor force works at businesses with 50 or fewer employees.</p>
+          </article>
         </div>
       </section>
 
