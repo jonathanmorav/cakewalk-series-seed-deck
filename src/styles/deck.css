@@ -4784,33 +4784,76 @@ button.product-browser__tab {
   }
 
   .slide[data-slide-id="tam"] .slide__body {
-    padding-right: 4.5cqw;
-    padding-left: 4.5cqw;
+    padding: 48px 4.5cqw 38px;
+  }
+
+  .tam-slide {
+    gap: 8px;
   }
 
   .tam-slide__headline {
-    font-size: clamp(26px, 4cqw, 36px);
+    font-size: clamp(27px, 4cqw, 33px);
+    line-height: 1.01;
   }
 
   .tam-market {
-    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.88fr);
-    gap: clamp(22px, 3cqw, 34px);
+    grid-template-columns: minmax(0, 1fr) minmax(210px, 0.9fr);
+    gap: clamp(18px, 3cqw, 28px);
   }
 
   .tam-market__circle--total {
-    width: clamp(220px, 32cqw, 300px);
+    width: clamp(185px, 27cqw, 205px);
+    padding-top: 14px;
+    gap: 3px;
+  }
+
+  .tam-market__circle--addressable {
+    padding: 10px;
+    gap: 4px;
+  }
+
+  .tam-market__circle-label {
+    font-size: clamp(7px, 0.85cqw, 9px);
+  }
+
+  .tam-market__value {
+    font-size: clamp(22px, 3.1cqw, 28px);
+  }
+
+  .tam-market__circle--addressable .tam-market__value {
+    font-size: clamp(31px, 4.6cqw, 39px);
+  }
+
+  .tam-market__share {
+    max-width: 15ch;
+    font-size: clamp(8px, 1.05cqw, 10px);
   }
 
   .tam-market__legend {
-    gap: 18px;
+    max-width: 330px;
+  }
+
+  .tam-market__legend-item {
+    padding: 7px 0 7px 14px;
+  }
+
+  .tam-market__legend-item::before {
+    margin-bottom: 3px;
+    font-size: clamp(7px, 0.85cqw, 8px);
   }
 
   .tam-market__legend-label h2 {
-    font-size: clamp(12px, 1.6cqw, 15px);
+    font-size: clamp(11px, 1.55cqw, 13px);
   }
 
   .tam-market__legend-item p {
-    font-size: clamp(10px, 1.25cqw, 12px);
+    margin-top: 3px;
+    font-size: clamp(8px, 1.18cqw, 10px);
+    line-height: 1.35;
+  }
+
+  .tam-market__workforce-value {
+    font-size: clamp(24px, 3.9cqw, 30px);
   }
 
   .tam-sources__drawer {
@@ -5233,56 +5276,76 @@ button.product-browser__tab {
   }
 
   .slide[data-slide-id="tam"] .slide__body {
-    padding: 82px 18px 150px;
+    padding: 82px 18px 112px;
+  }
+
+  .slide[data-slide-id="tam"] .slide__chrome--bottom {
+    display: none;
   }
 
   .tam-slide {
     display: flex;
     height: auto;
-    min-height: calc(100dvh - 232px);
+    min-height: 0;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .tam-slide__headline {
-    max-width: 20ch;
-    margin: 0 auto;
-    font-size: clamp(27px, 7.8vw, 35px);
-    line-height: 1.06;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    font-size: clamp(29px, 8.2vw, 34px);
+    line-height: 1.03;
   }
 
   .tam-market {
     width: 100%;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .tam-market__circle--total {
-    width: min(78vw, 330px);
+    width: min(78vw, 300px);
+    padding-top: 20px;
+    gap: 4px;
   }
 
   .tam-market__value {
-    top: 14px;
-    font-size: clamp(23px, 7vw, 30px);
+    font-size: clamp(27px, 7.4vw, 34px);
   }
 
   .tam-market__circle--addressable .tam-market__value {
-    top: 12px;
-    font-size: clamp(20px, 6vw, 26px);
+    font-size: clamp(42px, 12vw, 52px);
+  }
+
+  .tam-market__circle-label {
+    font-size: 9px;
+  }
+
+  .tam-market__share {
+    max-width: 16ch;
+    font-size: 10px;
   }
 
   .tam-market__legend {
     width: 100%;
     max-width: none;
-    gap: 10px;
+    border-left-color: var(--cw-v2-color-border);
   }
 
   .tam-market__legend-item {
-    padding: 14px;
-    border: 1px solid rgb(53 144 243 / 0.12);
-    border-radius: var(--cw-v2-radius-lg);
-    background: rgb(255 255 255 / 0.72);
-    box-shadow: var(--cw-v2-shadow-card);
+    padding: 12px 0 12px 18px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .tam-market__legend-item::before {
+    margin-bottom: 4px;
+    font-size: 8px;
   }
 
   .tam-market__legend-label h2 {
@@ -5290,8 +5353,12 @@ button.product-browser__tab {
   }
 
   .tam-market__legend-item p {
-    margin: 7px 0 0 22px;
+    margin: 5px 0 0;
     font-size: 13px;
+  }
+
+  .tam-market__workforce-value {
+    font-size: 36px;
   }
 
   .tam-sources {
@@ -5299,7 +5366,7 @@ button.product-browser__tab {
   }
 
   .tam-sources__toggle {
-    min-height: 40px;
+    min-height: 44px;
     padding: 9px 15px;
     font-size: 12px;
   }
