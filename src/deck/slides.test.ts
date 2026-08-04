@@ -166,7 +166,7 @@ describe("team and board profiles", () => {
   it("preserves Lucas Milliron's leadership experience", () => {
     expect(teamMembers[2]).toEqual({
       name: "Lucas Milliron",
-      title: "Chief Technology Officer",
+      title: "Head of Product & Engineering",
       image: "people/team-lucas.png",
       highlights: [
         "VP, Technology @ Salty (Acquired by CDK)",

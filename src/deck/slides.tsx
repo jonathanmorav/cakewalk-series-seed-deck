@@ -764,7 +764,7 @@ export const teamMembers: readonly PersonProfile[] = [
   },
   {
     name: "Lucas Milliron",
-    title: "Chief Technology Officer",
+    title: "Head of Product & Engineering",
     image: "people/team-lucas.png",
     highlights: [
       "VP, Technology @ Salty (Acquired by CDK)",
@@ -1139,7 +1139,7 @@ export const slides: DeckSlide[] = [
     section: "Team",
     tone: "canvas",
     brandPlacement: "footer",
-    notes: "Introduce the operating and insurance leadership behind Cakewalk, including Lucas Milliron as Chief Technology Officer.",
+    notes: "Introduce the operating and insurance leadership behind Cakewalk, including Lucas Milliron as Head of Product & Engineering.",
     render: () => <TeamSlide />,
   },
   {
