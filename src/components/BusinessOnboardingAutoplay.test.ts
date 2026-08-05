@@ -3,8 +3,12 @@ import {
   businessOnboardingDemoData,
   businessOnboardingLoopDuration,
   businessOnboardingProgressStepByScene,
+  businessOnboardingProgressSteps,
   businessOnboardingQuoteData,
+  businessOnboardingRosterData,
   businessOnboardingScenes,
+  businessOnboardingStepSlugByScene,
+  businessOnboardingStepTitleByScene,
   getBusinessOnboardingFrame,
 } from "./businessOnboardingWorkflow";
 
@@ -33,6 +37,30 @@ describe("BusinessOnboardingAutoplay", () => {
       "contribution-setup",
       "final-locked-quote",
     ]);
+    expect(businessOnboardingScenes.map(({ duration }) => duration)).toEqual([
+      4_200,
+      4_400,
+      2_800,
+      2_800,
+      3_000,
+      3_000,
+      2_300,
+      3_600,
+      2_800,
+      2_400,
+      3_800,
+      2_800,
+      3_000,
+      3_200,
+      3_200,
+      2_700,
+      2_800,
+      4_200,
+      2_800,
+      3_800,
+      4_000,
+    ]);
+    expect(businessOnboardingLoopDuration).toBe(67_600);
   });
 
   it("uses the seeded company and valid demo-only verification values", () => {
@@ -55,11 +83,23 @@ describe("BusinessOnboardingAutoplay", () => {
     expect(businessOnboardingScenes[1]).toEqual({ id: "company-confirmation", duration: 4_400 });
   });
 
+  it("keeps imported, eligible, and excluded roster counts explicit", () => {
+    expect(businessOnboardingRosterData).toEqual({
+      importedCount: 7,
+      eligibleCount: 5,
+      excludedCount: 2,
+    });
+    expect(businessOnboardingRosterData.importedCount).toBe(
+      businessOnboardingRosterData.eligibleCount + businessOnboardingRosterData.excludedCount,
+    );
+    expect(businessOnboardingQuoteData.employeeCount).toBe(businessOnboardingRosterData.eligibleCount);
+  });
+
   it("keeps the recommendation, contribution split, and locked quote in shared workflow data", () => {
     expect(businessOnboardingQuoteData.employeeCount).toBe(5);
     expect(businessOnboardingQuoteData.roughEstimate).toMatchObject({
-      monthlyLow: 1_303,
-      monthlyHigh: 1_871,
+      monthlyLow: 1_310,
+      monthlyHigh: 1_880,
       monthlyPerEmployee: 319,
     });
     expect(businessOnboardingQuoteData.plans.map(({ category }) => category)).toEqual([
@@ -73,20 +113,53 @@ describe("BusinessOnboardingAutoplay", () => {
     );
     expect(businessOnboardingQuoteData.contribution).toMatchObject({
       minimumMedicalPercent: 50,
+      employerMonthlyCost: 928,
       employerMonthly: 928,
       employeeMonthly: 668,
       averageEmployeeMonthly: 134,
     });
-    expect(businessOnboardingQuoteData.finalQuote).toEqual({ employerMonthly: 928, holdDays: 30 });
+    expect(businessOnboardingQuoteData.contribution.employerMonthly).toBe(
+      businessOnboardingQuoteData.contribution.employerMonthlyCost,
+    );
+    expect(businessOnboardingQuoteData.finalQuote).toEqual({
+      employerMonthlyCost: 928,
+      employerMonthly: 928,
+      holdDays: 30,
+    });
+    expect(businessOnboardingQuoteData.finalQuote.employerMonthly).toBe(
+      businessOnboardingQuoteData.finalQuote.employerMonthlyCost,
+    );
   });
 
   it("advances the five-stage indicator with the live lifecycle", () => {
+    expect(businessOnboardingProgressSteps).toEqual([
+      { id: "confirm-company", label: "Your company" },
+      { id: "roster-method", label: "Your team" },
+      { id: "underwriting", label: "Group census" },
+      { id: "results", label: "Your plans" },
+      { id: "quote", label: "Your costs" },
+    ]);
     expect(Object.keys(businessOnboardingProgressStepByScene)).toHaveLength(businessOnboardingScenes.length);
     expect(businessOnboardingProgressStepByScene["roster-review"]).toBe(1);
     expect(businessOnboardingProgressStepByScene["census-confirmation"]).toBe(2);
     expect(businessOnboardingProgressStepByScene["benefits-package"]).toBe(3);
     expect(businessOnboardingProgressStepByScene["contribution-setup"]).toBe(4);
     expect(businessOnboardingProgressStepByScene["final-locked-quote"]).toBe(4);
+  });
+
+  it("exposes the live step title for every autoplay scene", () => {
+    expect(Object.keys(businessOnboardingStepTitleByScene)).toHaveLength(businessOnboardingScenes.length);
+    expect(businessOnboardingStepTitleByScene["company-search"]).toBe("");
+    expect(businessOnboardingStepTitleByScene["roster-review"]).toBe("Your team");
+    expect(businessOnboardingStepTitleByScene["rough-estimate"]).toBe("Your ballpark");
+    expect(businessOnboardingStepTitleByScene["pricing-analysis"]).toBe("Building your plans");
+    expect(businessOnboardingStepTitleByScene["benefits-package"]).toBe("Your plans");
+    expect(businessOnboardingStepTitleByScene["contribution-setup"]).toBe("Set your contribution");
+    expect(businessOnboardingStepTitleByScene["final-locked-quote"]).toBe("You're covered");
+    expect(Object.keys(businessOnboardingStepSlugByScene)).toHaveLength(businessOnboardingScenes.length);
+    expect(businessOnboardingStepSlugByScene["company-search"]).toBe("");
+    expect(businessOnboardingStepSlugByScene["rough-estimate"]).toBe("indicative");
+    expect(businessOnboardingStepSlugByScene["final-locked-quote"]).toBe("complete");
   });
 
   it("advances through every scene and loops back to search", () => {

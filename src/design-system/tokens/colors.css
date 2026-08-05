@@ -116,7 +116,7 @@
   /* ── Composite surface backgrounds (context-specific) ──── */
   /* Dashboard / get-started canvas — uniform blue fade over white */
   --cw-v2-dashboard-canvas-background:
-    linear-gradient(180deg, rgb(53 144 243 / 0) 23.76%, rgb(53 144 243 / 0.1) 100%), #ffffff; /* @kind color */
+    linear-gradient(180deg, rgb(225 238 253 / 0.08) 23.76%, rgb(53 144 243 / 0.08) 100%), #ffffff; /* @kind color */
   /* Owner dashboard body panel */
   --cw-v2-owner-dashboard-body-background:
     linear-gradient(180deg, rgb(225 238 253 / 0.15) 0%, rgb(225 238 253 / 0.3) 100%); /* @kind color */

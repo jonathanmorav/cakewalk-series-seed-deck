@@ -315,8 +315,12 @@ function ProductBrowserSlide() {
   const [activeDemoId, setActiveDemoId] = useState<(typeof productDemos)[number]["id"]>(initialProductDemoId);
   const [reloadKey, setReloadKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [businessOnboardingStep, setBusinessOnboardingStep] = useState({ title: "", slug: "" });
   const tabGroupId = useId();
   const activeDemo = productDemos.find((demo) => demo.id === activeDemoId) ?? productDemos[0];
+  const activeDemoUrl = activeDemo.id === "business-onboarding"
+    ? `https://demo.cakewalkbenefits.com/business-activation-zero-entry${businessOnboardingStep.slug ? `/${businessOnboardingStep.slug}` : ""}?order=census-first`
+    : activeDemo.url;
 
   const selectDemo = (demoId: (typeof productDemos)[number]["id"]) => {
     setActiveDemoId(demoId);
@@ -383,9 +387,16 @@ function ProductBrowserSlide() {
             <span />
           </div>
 
-          <div className="product-browser__address" title={activeDemo.url}>
+          <div
+            className="product-browser__address"
+            title={activeDemo.id === "business-onboarding"
+              ? businessOnboardingStep.title
+                ? `${businessOnboardingStep.title} · Get your team covered | Cakewalk Benefits`
+                : "Get your team covered | Cakewalk Benefits"
+              : activeDemo.url}
+          >
             <LockKeyhole aria-hidden="true" />
-            <span>{compactDemoUrl(activeDemo.url)}</span>
+            <span>{compactDemoUrl(activeDemoUrl)}</span>
           </div>
 
           <button
@@ -418,7 +429,7 @@ function ProductBrowserSlide() {
           aria-labelledby={`${tabGroupId}-${activeDemo.id}`}
         >
           {activeDemo.id === "business-onboarding" ? (
-            <BusinessOnboardingAutoplay key={reloadKey} />
+            <BusinessOnboardingAutoplay key={reloadKey} onStepChange={setBusinessOnboardingStep} />
           ) : (
             <>
               {isLoading && (

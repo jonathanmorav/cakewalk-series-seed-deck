@@ -13,12 +13,18 @@ export const businessOnboardingDemoData = {
   verificationCode: "274916",
 } as const;
 
+export const businessOnboardingRosterData = {
+  importedCount: 7,
+  eligibleCount: 5,
+  excludedCount: 2,
+} as const;
+
 export const businessOnboardingQuoteData = {
   employeeCount: 5,
   location: "Chattanooga, TN 37405",
   roughEstimate: {
-    monthlyLow: 1_303,
-    monthlyHigh: 1_871,
+    monthlyLow: 1_310,
+    monthlyHigh: 1_880,
     monthlyPerEmployee: 319,
   },
   preliminaryMonthlyRate: {
@@ -65,11 +71,13 @@ export const businessOnboardingQuoteData = {
   },
   contribution: {
     minimumMedicalPercent: 50,
+    employerMonthlyCost: 928,
     employerMonthly: 928,
     employeeMonthly: 668,
     averageEmployeeMonthly: 134,
   },
   finalQuote: {
+    employerMonthlyCost: 928,
     employerMonthly: 928,
     holdDays: 30,
   },
@@ -100,6 +108,62 @@ export const businessOnboardingScenes = [
 ] as const;
 
 export type BusinessOnboardingSceneId = (typeof businessOnboardingScenes)[number]["id"];
+
+export const businessOnboardingProgressSteps = [
+  { id: "confirm-company", label: "Your company" },
+  { id: "roster-method", label: "Your team" },
+  { id: "underwriting", label: "Group census" },
+  { id: "results", label: "Your plans" },
+  { id: "quote", label: "Your costs" },
+] as const;
+
+export const businessOnboardingStepTitleByScene: Record<BusinessOnboardingSceneId, string> = {
+  "company-search": "",
+  "company-confirmation": "Confirm your company",
+  "team-explanation": "Add your team",
+  "payroll-selection": "Add your team",
+  "account-email": "Add your team",
+  "account-code": "Add your team",
+  "provider-overview": "Add your team",
+  "provider-login": "Add your team",
+  "team-import": "Add your team",
+  "connection-complete": "Add your team",
+  "roster-review": "Your team",
+  "rough-estimate": "Your ballpark",
+  "census-choice": "Review",
+  "census-confirmation": "Review",
+  underwriting: "Review",
+  "pricing-analysis": "Building your plans",
+  "plan-qualified": "Building your plans",
+  "benefits-package": "Your plans",
+  "contribution-explainer": "Set your contribution",
+  "contribution-setup": "Set your contribution",
+  "final-locked-quote": "You're covered",
+};
+
+export const businessOnboardingStepSlugByScene: Record<BusinessOnboardingSceneId, string> = {
+  "company-search": "",
+  "company-confirmation": "confirm-company",
+  "team-explanation": "payroll-intro",
+  "payroll-selection": "roster-method",
+  "account-email": "roster-method",
+  "account-code": "roster-method",
+  "provider-overview": "roster-method",
+  "provider-login": "roster-method",
+  "team-import": "roster-method",
+  "connection-complete": "roster-method",
+  "roster-review": "roster-entry",
+  "rough-estimate": "indicative",
+  "census-choice": "underwriting",
+  "census-confirmation": "underwriting",
+  underwriting: "underwriting",
+  "pricing-analysis": "building",
+  "plan-qualified": "building",
+  "benefits-package": "results",
+  "contribution-explainer": "contribution-intro",
+  "contribution-setup": "quote",
+  "final-locked-quote": "complete",
+};
 
 export const businessOnboardingProgressStepByScene: Record<BusinessOnboardingSceneId, 0 | 1 | 2 | 3 | 4> = {
   "company-search": 0,
